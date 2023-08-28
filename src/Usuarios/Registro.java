@@ -1,59 +1,72 @@
 package Usuarios;
+import java.util.ArrayList;
 
 import java.io.*;
 import java.util.Arrays;
 
 public class Registro {
-    private Usuario[] usuarios;
-    private int noRegistros;
-
-    public Registro(int capacidadMaxima) {
-        usuarios = new Usuario[capacidadMaxima];
-        noRegistros = 0;
+    private ArrayList<Usuario> registro = new ArrayList<Usuario>();
+    private int noRegistro;
+    
+    public Registro(ArrayList<Usuario> registro, int noRegistro) {
+        this.registro = registro;
+        this.noRegistro = noRegistro;
+    }
+    
+    public Registro() {
+        this.registro = new ArrayList<Usuario>();
+        this.noRegistro = 0;
+    }
+    
+    public ArrayList<Usuario> getRegistro() {
+        return registro;
     }
 
-    public int agregar(Usuario u) {
-        if (noRegistros < usuarios.length && buscarPosicion(u.getId()) == -1) {
-            usuarios[noRegistros] = u;
-            noRegistros++;
-            Arrays.sort(usuarios, 0, noRegistros); // Ordenar usuarios por número de identificación
-            return 1; // Usuario agregado exitosamente
-        } else if (noRegistros >= usuarios.length) {
-            return 0; // Registro lleno
-        } else {
-            return -1; // Usuario con el mismo número de identificación ya existe
-        }
+    public void setRegistro(ArrayList<Usuario> registro) {
+        this.registro = registro;
     }
 
-    public Usuario eliminar(long id) {
-        int pos = buscarPosicion(id);
-        if (pos != -1) {
-            Usuario usuarioEliminado = usuarios[pos];
-            for (int i = pos; i < noRegistros - 1; i++) {
-                usuarios[i] = usuarios[i + 1];
-            }
-            usuarios[noRegistros - 1] = null;
-            noRegistros--;
-            return usuarioEliminado;
-        }
-        return null; // Usuario no encontrado
+    public int getNoRegistro() {
+        return noRegistro;
     }
 
-    public int buscarPosicion(long id) {
-        for (int i = 0; i < noRegistros; i++) {
-            if (usuarios[i].getId() == id) {
+    public void setNoRegistro(int noRegistro) {
+        this.noRegistro = noRegistro;
+    }
+    
+	public boolean agregar(Usuario u) {
+		if (registro.contains(u)) {
+			return false;
+		}else {
+			registro.add(u);
+			return true;
+		}
+	}
+	
+	public Usuario eliminar(long id) {
+		if (registro.contains(id)) {
+			registro.remove(id);
+		}else {
+			return ;
+		}
+	}
+	
+	public int buscarPosicion(long id) {
+        for (int i = 0; i < registro.size(); i++) {
+            if (registro.get(i).getId() == id) {
                 return i;
             }
         }
-        return -1; // Usuario no encontrado
+        return -1;
     }
-
+	
     public Usuario buscarUsuario(long id) {
-        int pos = buscarPosicion(id);
-        if (pos != -1) {
-            return usuarios[pos];
+        for (Usuario usuario : registro) {
+            if (usuario.getId() == id) {
+                return usuario;
+            }
         }
-        return null; // Usuario no encontrado
-    
-}
+        return null;
+    }
+	
 }
