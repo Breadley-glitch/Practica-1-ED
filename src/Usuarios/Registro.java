@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.Arrays;
 
-public class Registro {
-    private ArrayList<Usuario> registro = new ArrayList<Usuario>();
+public class Registro implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
+	private ArrayList<Usuario> registro = new ArrayList<Usuario>();
     private int noRegistro;
     
     public Registro(ArrayList<Usuario> registro, int noRegistro) {
@@ -34,6 +35,10 @@ public class Registro {
         this.noRegistro = noRegistro;
     }
     
+    public void RegistroMetod(int capacity) {
+        this.registro.ensureCapacity(capacity);
+    }
+    
 	public boolean agregar(Usuario u) {
 		if (registro.contains(u)) {
 			return false;
@@ -44,11 +49,12 @@ public class Registro {
 	}
 	
 	public Usuario eliminar(long id) {
-		if (registro.contains(id)) {
-			registro.remove(id);
-		}else {
-			return ;
-		}
+	    int index = buscarPosicion(id);
+	    if (index != -1) {
+	        return registro.remove(index);
+	    } else {
+	        return null;
+	    }
 	}
 	
 	public int buscarPosicion(long id) {
