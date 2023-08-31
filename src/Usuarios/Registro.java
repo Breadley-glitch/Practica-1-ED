@@ -1,8 +1,4 @@
 package Usuarios;
-import java.util.ArrayList;
-
-import java.io.*;
-import java.util.Arrays;
 
 public class Registro implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
