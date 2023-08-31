@@ -6,24 +6,15 @@ import java.util.Arrays;
 
 public class Registro implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
-	private ArrayList<Usuario> registro = new ArrayList<Usuario>();
+	private Usuario[] registro;
     private int noRegistro;
     
-    public Registro(ArrayList<Usuario> registro, int noRegistro) {
-        this.registro = registro;
-        this.noRegistro = noRegistro;
-    }
     
-    public Registro() {
-        this.registro = new ArrayList<Usuario>();
-        this.noRegistro = 0;
-    }
-    
-    public ArrayList<Usuario> getRegistro() {
+    public Usuario[] getRegistro() {
         return registro;
     }
 
-    public void setRegistro(ArrayList<Usuario> registro) {
+    public void setRegistro(Usuario[] registro) {
         this.registro = registro;
     }
 
@@ -35,44 +26,74 @@ public class Registro implements java.io.Serializable {
         this.noRegistro = noRegistro;
     }
     
-    public void RegistroMetod(int capacity) {
-        this.registro.ensureCapacity(capacity);
+    public Registro(int capacity) {
+    	this.noRegistro = capacity;
+        //Usuario[] arr = new Usuario[noRegistro];
     }
     
-	public boolean agregar(Usuario u) {
-		if (registro.contains(u)) {
+    public boolean agregar(Usuario u) {
+		boolean contains = false;
+		for (Usuario usuario : registro) {
+			if (usuario != null && usuario.equals(u)) {
+				contains = true;
+				break;
+			}
+		}
+		
+		if (contains || noRegistro >= registro.length) {
 			return false;
-		}else {
-			registro.add(u);
+		} else {
+			registro[noRegistro] = u;
+			noRegistro++;
+			organizarUsuario();
 			return true;
 		}
 	}
+    
+	public void organizarUsuario() {
+		for (int i = 0; i < noRegistro - 1; i++) {
+			for (int j = i + 1; j < noRegistro; j++) {
+				if (registro[i].getId() > registro[j].getId()) {
+					Usuario temp = registro[i];
+					registro[i] = registro[j];
+					registro[j] = temp;
+				}
+			}
+		}
+	}
+	
 	
 	public Usuario eliminar(long id) {
 	    int index = buscarPosicion(id);
 	    if (index != -1) {
-	        return registro.remove(index);
+	        Usuario removedUser = registro[index];
+	        for (int i = index; i < noRegistro - 1; i++) {
+	        	registro[i] = registro[i + 1];
+	        }
+	        noRegistro--;
+	        organizarUsuario();
+	        return removedUser;
 	    } else {
 	        return null;
 	    }
 	}
 	
 	public int buscarPosicion(long id) {
-        for (int i = 0; i < registro.size(); i++) {
-            if (registro.get(i).getId() == id) {
+        for (int i = 0; i < noRegistro; i++) {
+            if (registro[i].getId() == id) {
                 return i;
             }
         }
         return -1;
     }
 	
-    public Usuario buscarUsuario(long id) {
-        for (Usuario usuario : registro) {
-            if (usuario.getId() == id) {
-                return usuario;
+	public String buscarUsuario(long id) {
+        for (int i = 0; i < noRegistro; i++) {
+            if (registro[i].getId() == id) {
+                return registro[i].toString();
             }
         }
-        return null;
+        return "No se encontró un usuario con el ID especificado.";
     }
 	
 }
