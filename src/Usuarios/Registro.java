@@ -23,11 +23,14 @@ public class Registro implements java.io.Serializable {
     }
     
     public Registro(int capacity) {
-    	this.noRegistro = capacity;
-        //Usuario[] arr = new Usuario[noRegistro];
+    	this.noRegistro = 0;
+    	this.registro = new Usuario[capacity];
     }
     
     public boolean agregar(Usuario u) {
+    	if (noRegistro >= registro.length) {
+            return false;
+        }
 		boolean contains = false;
 		for (Usuario usuario : registro) {
 			if (usuario != null && usuario.equals(u)) {
