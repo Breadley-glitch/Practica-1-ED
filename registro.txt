@@ -1,0 +1,4 @@
+Usuario [id=1, nombre=Juan, fecha de nacimiento=29/9/2003, ciudad de nacimiento=Barranquilla, direccion=Dirección{calle='Carrera', noCalle=17, nomenclatura='null', barrio='La union', ciudad='Barranquilla'}, telefono=315284677, email=elperro@unal.edu.co]
+Usuario [id=2, nombre=Maria, fecha de nacimiento=null, ciudad de nacimiento=null, direccion=null, telefono=0, email=null]
+Usuario [id=4, nombre=Lucia, fecha de nacimiento=null, ciudad de nacimiento=null, direccion=null, telefono=0, email=null]
+Usuario [id=5, nombre=Sofia, fecha de nacimiento=null, ciudad de nacimiento=null, direccion=null, telefono=0, email=null]

@@ -1,4 +1,7 @@
 package Usuarios;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Test {
     public static void main(String[] args) {
@@ -9,6 +12,21 @@ public class Test {
         Usuario u3 = new Usuario(3, "Pedro");
         Usuario u4 = new Usuario(4, "Lucia");
         Usuario u5 = new Usuario(5, "Sofia");
+        
+        Fecha fecha1 = new Fecha(29,9,2003);
+        Fecha fecha2 = new Fecha(20,8,2000);
+        Fecha fecha3 = new Fecha(9,7,2003);
+        Fecha fecha4 = new Fecha(1,6,2003);
+        Fecha fecha5 = new Fecha(1,11,2003);
+        
+        Direccion direccion1 = new Direccion("Carrera",17,"La union","Barranquilla");
+        
+        u1.setEmail("elperro@unal.edu.co");
+        u1.setCiudadNacimiento("Barranquilla");
+        u1.setFechaNacimiento(fecha1);
+        u1.setDireccion(direccion1);
+        u1.setTelefono(315284677);
+        
 
         System.out.println("Agregando usuarios...");
         System.out.println(registro.agregar(u3)); // true
@@ -16,8 +34,9 @@ public class Test {
         System.out.println(registro.agregar(u2)); // true
         System.out.println(registro.agregar(u5)); // true
         System.out.println(registro.agregar(u4)); // true
-
-        System.out.println("Final array after adding users:");
+        
+        
+        System.out.println("Final array después de agregar usuarios:");
         printRegistro(registro);
 
         System.out.println("Intentando agregar un usuario con un ID ya existente...");
@@ -34,16 +53,19 @@ public class Test {
             System.out.println("No se encontró un usuario con el ID especificado.");
         }
 
-        System.out.println("Final array after removing user:");
+        System.out.println("Final array después de remover user:");
         printRegistro(registro);
 
         System.out.println("Buscando un usuario existente...");
         String foundUser = registro.buscarUsuario(2);
-        System.out.println(foundUser); // Usuario [id=2, nombre=Maria, ...]
+        System.out.println(foundUser); 
 
         System.out.println("Buscando un usuario no existente...");
         String notFoundUser = registro.buscarUsuario(6);
-        System.out.println(notFoundUser); // No se encontró un usuario con el ID especificado.
+        System.out.println(notFoundUser); 
+
+        // Save the list of users to a text file
+        saveRegistroToFile(registro, "registro.txt");
     }
 
     private static void printRegistro(Registro registro) {
@@ -53,4 +75,19 @@ public class Test {
             }
         }
     }
+
+    private static void saveRegistroToFile(Registro registro, String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (Usuario usuario : registro.getRegistro()) {
+                if (usuario != null) {
+                    writer.write(usuario.toString());
+                    writer.newLine();
+                }
+            }
+            System.out.println("Usuarios guardados en " + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+	

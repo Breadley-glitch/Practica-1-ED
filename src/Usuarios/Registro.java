@@ -67,8 +67,9 @@ public class Registro implements java.io.Serializable {
 	    if (index != -1) {
 	        Usuario removedUser = registro[index];
 	        for (int i = index; i < noRegistro - 1; i++) {
-	        	registro[i] = registro[i + 1];
+	            registro[i] = registro[i + 1];
 	        }
+	        registro[noRegistro - 1] = null;
 	        noRegistro--;
 	        organizarUsuario();
 	        return removedUser;
@@ -76,6 +77,7 @@ public class Registro implements java.io.Serializable {
 	        return null;
 	    }
 	}
+
 	
 	public int buscarPosicion(long id) {
         for (int i = 0; i < noRegistro; i++) {
