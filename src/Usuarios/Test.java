@@ -1,5 +1,7 @@
 package Usuarios;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -66,6 +68,8 @@ public class Test {
 
         // Save the list of users to a text file
         saveRegistroToFile(registro, "registro.txt");
+     // Read and print the user information from the file
+        readRegistroFromFile("registro.txt");
     }
 
     private static void printRegistro(Registro registro) {
@@ -80,11 +84,33 @@ public class Test {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Usuario usuario : registro.getRegistro()) {
                 if (usuario != null) {
-                    writer.write(usuario.toString());
+                    writer.write(usuario.getId() + ", " + usuario.getNombre() + ", ");
+                    if (usuario.getFechaNacimiento() != null) {
+                        writer.write(usuario.getFechaNacimiento().getDia() + "," + usuario.getFechaNacimiento().getMes() + "," + usuario.getFechaNacimiento().getAnio() + ", ");
+                    } else {
+                        writer.write("null, null, null, ");
+                    }
+                    writer.write(usuario.getCiudadNacimiento() + ", ");
+                    if (usuario.getDireccion() != null) {
+                        writer.write(usuario.getDireccion().getCalle() + ", " + usuario.getDireccion().getNoCalle() + ", " + usuario.getDireccion().getBarrio() + ", " + usuario.getDireccion().getCiudad() + ", ");
+                    } else {
+                        writer.write("null, null, null, null, ");
+                    }
+                    writer.write(usuario.getTelefono() + ", " + usuario.getEmail());
                     writer.newLine();
                 }
             }
             System.out.println("Usuarios guardados en " + filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static void readRegistroFromFile(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
