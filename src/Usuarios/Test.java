@@ -66,9 +66,8 @@ public class Test {
         String notFoundUser = registro.buscarUsuario(6);
         System.out.println(notFoundUser); 
 
-        // Save the list of users to a text file
         saveRegistroToFile(registro, "registro.txt");
-     // Read and print the user information from the file
+
         readRegistroFromFile("registro.txt");
     }
 
@@ -79,8 +78,7 @@ public class Test {
             }
         }
     }
-
-    private static void saveRegistroToFile(Registro registro, String filename) {
+    private static void saveRegistroToFile(Registro registro, String filename) {//
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (Usuario usuario : registro.getRegistro()) {
                 if (usuario != null) {
