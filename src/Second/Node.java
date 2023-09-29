@@ -11,7 +11,8 @@ public class Node {
 
  
  public Node(Object e) {
-	 
+	 data=e;
+	 next=null;
  }
  
  public Object getData() {
