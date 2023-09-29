@@ -1,4 +1,4 @@
 1, Juan, 29,9,2003, Barranquilla, Carrera, 17, La union, Barranquilla, 315284677, elperro@unal.edu.co
-2, Maria, 29,9,2003, Barranquilla, Carrera, 17, La union, Barranquilla, 315284677, elperro@unal.edu.co
-4, Lucia, 29,9,2003, Barranquilla, Carrera, 17, La union, Barranquilla, 315284677, elperro@unal.edu.co
-5, Sofia, 29,9,2003, Barranquilla, Carrera, 17, La union, Barranquilla, 315284677, elperro@unal.edu.co
+2, Maria, null, null, null, null, null, null, null, null, 0, null
+4, Lucia, null, null, null, null, null, null, null, null, 0, null
+5, Sofia, null, null, null, null, null, null, null, null, 0, null
