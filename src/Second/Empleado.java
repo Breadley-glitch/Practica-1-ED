@@ -8,10 +8,16 @@ public class Empleado {
     private Direccion direccion;
     private long telefono;
     private String email;
+    private boolean administrador;
+    private BandejaDeEntrada bandejaDeEntrada;
+    private MensajesLeidos mensajesLeidos;
 
-    public Empleado(long id, String nombre) {
+    public Empleado(long id, String nombre, boolean admin) {
         this.id = id;
         this.nombre = nombre;
+        this.administrador= admin;
+        this.bandejaDeEntrada = new BandejaDeEntrada();
+        this.mensajesLeidos = new MensajesLeidos();
     }
 
     public long getId() {
@@ -68,6 +74,18 @@ public class Empleado {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public boolean isAdministrador() {
+    	return administrador ==true;
+    }
+    
+    public BandejaDeEntrada getBandejaDeEntrada() {
+    	return bandejaDeEntrada;
+    }
+    
+    public MensajesLeidos getMensajesLeidos() {
+        return mensajesLeidos;
     }
     
     public String toString() {

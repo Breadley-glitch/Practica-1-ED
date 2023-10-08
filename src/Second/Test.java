@@ -41,6 +41,6 @@ public class Test {
         System.out.println("Updated list size: " + myList.size());
         System.out.println("Last element after removal: " + myList.Last().getData());
         
-        
+
     }
 }
