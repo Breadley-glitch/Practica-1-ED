@@ -10,6 +10,17 @@ public class DoubleList {
 		tail=null;
 		size=0;
 	}
+	@Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        DoubleNode current = head; // Asume que 'head' es el primer nodo de tu lista
+        while (current != null) {
+            sb.append(current.getData().toString()); // Asume que 'data' es el campo de datos en tu nodo
+            sb.append("\n"); // Agrega un salto de línea entre cada mensaje
+            current = current.getNext(); // Asume que 'next' te da el siguiente nodo en la lista
+        }
+        return sb.toString();
+	}
 	
 	public int size() {
 		return size;
@@ -125,6 +136,7 @@ public class DoubleList {
 			size++;
 		}
 	}
+	
 	
 	
 }

@@ -10,17 +10,18 @@ public class BandejaDeEntrada {
 	public void enviarMensajes(long id, String titulo, String mensaje) {
 		
 	}
-	
+	public DoubleList getMensajes() {
+        return mensajes;
+    }
 	public void recibirMensaje(Object mensaje) {
 	        mensajes.addFisrt(mensaje);
 	}
 	 
-	public Object leerMensaje(DoubleNode a) {
-	    Object temp = mensajes.remove(a); 
-		
-	    return temp;	        
-	        
+	public Object leerMensaje() {
+	    if (!mensajes.isEmpty()) {
+	        return mensajes.removeFirst();
+	    } else {
+	        return null;
+	    }
 	}
-	
-	
 }

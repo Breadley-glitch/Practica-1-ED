@@ -1,7 +1,8 @@
 package Second;
+import java.util.ArrayList;
 
 public class Empleado {
-    private long id;
+	private long id;
     private String nombre;
     private Fecha fecha_Nac;
     private String ciudad_Nac;
@@ -11,15 +12,29 @@ public class Empleado {
     private boolean administrador;
     private BandejaDeEntrada bandejaDeEntrada;
     private MensajesLeidos mensajesLeidos;
+    private String contrasena;
 
-    public Empleado(long id, String nombre, boolean admin) {
+    public Empleado(long id, String nombre, boolean admin, String contrasena) {
         this.id = id;
         this.nombre = nombre;
         this.administrador= admin;
+        this.contrasena=contrasena;
         this.bandejaDeEntrada = new BandejaDeEntrada();
         this.mensajesLeidos = new MensajesLeidos();
     }
-
+    public Empleado(long id, String nombre, String contrasena) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contrasena=contrasena;
+        this.bandejaDeEntrada = new BandejaDeEntrada();
+        this.mensajesLeidos = new MensajesLeidos();
+    }
+    public String getContrasena() {
+    	return contrasena;
+    }
+    public void setContrasena(String contrasena) {
+    	this.contrasena = contrasena;
+    }
     public long getId() {
         return id;
     }
@@ -88,6 +103,17 @@ public class Empleado {
         return mensajesLeidos;
     }
     
+    public Object leerMensaje() {
+        Object mensaje = bandejaDeEntrada.leerMensaje();
+        if (mensaje != null) {
+            mensajesLeidos.agregarMensaje(mensaje);
+        }
+        return mensaje;
+    }
+        
+    public void enviarMensaje(Empleado destinatario, Object mensaje) {
+        destinatario.getBandejaDeEntrada().recibirMensaje(mensaje);
+    }
     public String toString() {
 		return "Empleado [id=" + id + ", nombre=" + nombre + ", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
 				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "]";
