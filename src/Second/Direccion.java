@@ -2,12 +2,12 @@ package Second;
 
 public class Direccion {
 private String calle;
-private int noCalle;
+private String noCalle;
 private String nomenclatura;
 private String barrio;
 private String ciudad;
 
-public Direccion(String calle, int noCalle, String barrio, String ciudad) {
+public Direccion(String calle, String noCalle, String barrio, String ciudad) {
     this.calle = calle;
     this.noCalle = noCalle;
     this.barrio = barrio;
@@ -22,11 +22,11 @@ public void setCalle(String calle) {
     this.calle = calle;
 }
 
-public int getNoCalle() {
+public String getNoCalle() {
     return noCalle;
 }
 
-public void setNoCalle(int noCalle) {
+public void setNoCalle(String noCalle) {
     this.noCalle = noCalle;
 }
 

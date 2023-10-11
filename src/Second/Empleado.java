@@ -12,11 +12,18 @@ public class Empleado {
     private BandejaDeEntrada bandejaDeEntrada;
     private MensajesLeidos mensajesLeidos;
     private String contrasena;
+    
+    
 
-    public Empleado(long id, String nombre, boolean admin, String contrasena) {
-        this.id = id;
-        this.nombre = nombre;
-        this.administrador= admin;
+    public Empleado(String nombre, long id, int dia, int mes, int ano, String ciudad, long tel, String correo, String calle, String num, String barrio, String city, String contrasena, String admin) {
+    	this.nombre = nombre;
+    	this.id = id;
+    	this.fecha_Nac= new Fecha(dia,mes,ano);
+    	this.ciudad_Nac=ciudad;
+    	this.telefono=tel;
+    	this.email=correo;
+    	this.direccion= new Direccion(calle,num,barrio,city);
+    	this.administrador = "administrador".equals(admin);
         this.contrasena=contrasena;
         this.bandejaDeEntrada = new BandejaDeEntrada();
         this.mensajesLeidos = new MensajesLeidos();
@@ -91,7 +98,7 @@ public class Empleado {
     }
     
     public boolean isAdministrador() {
-    	return administrador ==true;
+    	return administrador;
     }
     
     public BandejaDeEntrada getBandejaDeEntrada() {
@@ -117,7 +124,7 @@ public class Empleado {
 		return "Empleado [id=" + id + ", nombre=" + nombre + ", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
 				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "]";
 	}
-    
+
     
     
 }
