@@ -14,7 +14,7 @@ public class BandejaDeEntrada {
         return mensajes;
     }
 	public void recibirMensaje(Object mensaje) {
-	        mensajes.addFisrt(mensaje);
+	        mensajes.addFirst(mensaje);
 	}
 	 
 	public Object leerMensaje() {

@@ -38,7 +38,7 @@ public class DoubleList {
 		return tail;
 	}
 	
-	public void addFisrt(Object e) {
+	public void addFirst(Object e) {
 		DoubleNode n = new DoubleNode(e);
 		if(isEmpty()) {
 			head =n;
@@ -111,7 +111,7 @@ public class DoubleList {
 	
 	public void addBefore(DoubleNode n, Object e) {
 		if (n==head) {
-			addFisrt(e);
+			addFirst(e);
 		}else {
 			DoubleNode m = new DoubleNode(e);
 			DoubleNode temp_prev = n.getPrev();
@@ -136,7 +136,4 @@ public class DoubleList {
 			size++;
 		}
 	}
-	
-	
-	
 }

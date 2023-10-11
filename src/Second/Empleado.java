@@ -1,5 +1,4 @@
 package Second;
-import java.util.ArrayList;
 
 public class Empleado {
 	private long id;
@@ -118,6 +117,9 @@ public class Empleado {
 		return "Empleado [id=" + id + ", nombre=" + nombre + ", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
 				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "]";
 	}
+    
+    
+    
 }
 
 

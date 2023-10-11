@@ -11,7 +11,7 @@ public class MensajesLeidos {
         mensajes.enqueue(mensaje);
     }
 
-    public Object obtenerSiguienteMensaje(Object a) {
-        return mensajes.dequeue(a);
+    public Object obtenerSiguienteMensaje() {
+        return mensajes.dequeue();
     }
 }
