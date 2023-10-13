@@ -3,7 +3,6 @@ package Second;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Test2 {
     public static void main(String[] args) {
@@ -25,7 +24,7 @@ public class Test2 {
                         if (currentLine == lineCount) {
                             String[] empleadosParts = empleadosLine.split(" ");
                             String[] passwordParts = passwordLine.split(" ");
-                            if (empleadosParts.length >= 15 && passwordParts.length >= 3) {
+                            if (empleadosParts.length <= 15 && passwordParts.length <= 3) {
                                 String nombre = empleadosParts[0];
                                 long id = Long.parseLong(empleadosParts[1]);
                                 int dia = Integer.parseInt(empleadosParts[2]);
@@ -43,7 +42,8 @@ public class Test2 {
 
                                 Empleado empleado = new Empleado(nombre, id, dia, mes, ano, ciudad, tel, correo, calle, num, barrio, city, contrasena, admin);
                                 registro.newEmpleado(empleado);
-                                registro.addEmpleadoToList(empleado); // Store the employee in empleadoList
+                                // Print the employee object right after it's created
+                                // System.out.println(empleado.toString());
                                 break;
                             }
                         }
@@ -59,14 +59,5 @@ public class Test2 {
             System.err.println("Error reading Password.txt: " + e.getMessage());
         }
 
-        // Print the list of employees created from empleadoList
-        ArrayList<Empleado> employeesList = registro.getEmpleadoList(); // Use getEmpleadoList
-        System.out.println("List of Employees:");
-        for (Empleado employee : employeesList) {
-            System.out.println(employee.toString());
-        }
-
-        // The rest of your code to handle login and other operations.
     }
 }
-

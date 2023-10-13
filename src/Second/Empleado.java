@@ -28,7 +28,7 @@ public class Empleado {
         this.bandejaDeEntrada = new BandejaDeEntrada();
         this.mensajesLeidos = new MensajesLeidos();
     }
-    public Empleado(long id, String nombre, String contrasena) {
+    public Empleado(Long id, String nombre, String contrasena) {
         this.id = id;
         this.nombre = nombre;
         this.contrasena=contrasena;
@@ -45,7 +45,7 @@ public class Empleado {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -85,7 +85,7 @@ public class Empleado {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
@@ -121,8 +121,8 @@ public class Empleado {
         destinatario.getBandejaDeEntrada().recibirMensaje(mensaje);
     }
     public String toString() {
-		return "Empleado [id=" + id + ", nombre=" + nombre + ", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
-				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "]";
+		return "Empleado [nombre=" + nombre + ", id=" + id + ", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
+				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "Admin=" +administrador+ "]";
 	}
 
     
