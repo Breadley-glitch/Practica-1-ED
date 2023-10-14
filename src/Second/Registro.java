@@ -43,6 +43,23 @@
 	    	return Empleados;
 	    }
 	
-	    
-	    
+	    public Empleado buscarEmpleadoPorId(long id) {
+	        DoubleNode actual = Empleados.first();
+	        while (actual != null) {
+	            Empleado empleado = (Empleado) actual.getData();
+	            if (empleado.getId() == id) {
+	                return empleado;
+	            }
+	            actual = actual.getNext();
+	        }
+	        return null;
+	    }
+	    public void imprimirEmpleados() {
+	        DoubleNode actual = Empleados.first();
+	        while (actual != null) {
+	            Empleado empleado = (Empleado) actual.getData();
+	            System.out.println(empleado.toString());
+	            actual = actual.getNext();
+	        }
+	    }
 	}

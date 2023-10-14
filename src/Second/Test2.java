@@ -3,11 +3,24 @@ package Second;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Test2 {
     public static void main(String[] args) {
         Registro registro = new Registro();
+        Scanner scanner = new Scanner(System.in);
+        
+        Empleado admin1 = new Empleado("Admin", 1, 1, 1, 2000, "CiudadAdmin", 1234567890L, "admin@empresa.com", "CalleAdmin", "1A", "BarrioAdmin", "CiudadAdmin", "admin123", "administrador");
+        registro.newEmpleado(admin1);
 
+        // Crear un usuario normal
+        Empleado user = new Empleado(2L, "User", "user123");
+        registro.newEmpleado(user);
+        
+        Empleado user2 = new Empleado(3L, "User2", "user123");
+        registro.newEmpleado(user2);
+        
+        registro.imprimirEmpleados();
         // Specify absolute file paths for Empleados.txt and Password.txt
         String empleadosFilePath = "C:/Users/jossh/OneDrive/Documents/GitHub/Practica-1-ED/Empleados.txt";
         String passwordFilePath = "C:/Users/jossh/OneDrive/Documents/GitHub/Practica-1-ED/Password.txt";
@@ -58,6 +71,20 @@ public class Test2 {
         } catch (IOException e) {
             System.err.println("Error reading Password.txt: " + e.getMessage());
         }
-
+        System.out.println("Por favor, introduce tu ID:");
+        long id = scanner.nextLong();
+        Empleado empleado = registro.buscarEmpleadoPorId(id);
+        if (empleado == null) {
+            System.out.println("No se encontró ningún empleado con este ID.");
+            return;
+        }
+        System.out.println("Por favor, introduce tu contraseña:");
+        String contrasena = scanner.next();
+        if (!empleado.getContrasena().equals(contrasena)) {
+            System.out.println("Contraseña incorrecta.");
+            return;
+        }
+        System.out.println("¡Inicio de sesión exitoso! ¡Bienvenido, " + empleado.getNombre() + "!");
+    } 
     }
-}
+

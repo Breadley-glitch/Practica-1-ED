@@ -39,29 +39,29 @@ public class DoubleList {
 	}
 	
 	public void addFirst(Object e) {
-		DoubleNode n = new DoubleNode(e);
-		if(isEmpty()) {
-			head =n;
-			tail =n;
-		}else {
-			n.setNext(head);
-			head.setPrev(n);
-			head=n;
-			size++;
-		}
+	    DoubleNode n = new DoubleNode(e);
+	    if(isEmpty()) {
+	        head = n;
+	        tail = n;
+	    } else {
+	        n.setNext(head);
+	        head.setPrev(n);
+	        head = n;
+	    }
+	    size++;
 	}
-	
+
 	public void addLast(Object e) {
-		DoubleNode n = new DoubleNode(e);
-		if(isEmpty()) {
-			head =n;
-			tail =n;
-		}else {
-			tail.setNext(n);
-			n.setPrev(tail);
-			tail=n;
-			size++;
-		}
+	    DoubleNode n = new DoubleNode(e);
+	    if(isEmpty()) {
+	        head = n;
+	        tail = n;
+	    } else {
+	        tail.setNext(n);
+	        n.setPrev(tail);
+	        tail = n;
+	    }
+	    size++;
 	}
 	
 	public Object removeFirst() {
