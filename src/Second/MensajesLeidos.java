@@ -1,9 +1,10 @@
 package Second;
 
-public class MensajesLeidos {
+public class MensajesLeidos extends Mensaje {
     private Queue mensajes;
 
     public MensajesLeidos() {
+        super(0, "", "");
         mensajes = new Queue();
     }
 

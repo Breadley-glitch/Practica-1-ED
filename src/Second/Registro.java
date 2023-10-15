@@ -12,17 +12,16 @@
 	    }
 	
 	    
-	    public Empleado nuevoEmpleado(Empleado empleado) {
-	        if (empleado.isAdministrador()) {
-	            Empleados.addFirst(empleado);
-	            return empleado;
+	    public Empleado nuevoEmpleado(Empleado nuevoEmpleado) {
+	        if (nuevoEmpleado.isAdministrador()) {
+	            Empleados.addFirst(nuevoEmpleado);
+	            return nuevoEmpleado;
 	        } else {
 	            System.out.println("Acción no permitida. Solo los administradores pueden crear nuevos empleados.");
 	            return null;
 	        }
 	    }
 	    
-	     //DoubleNode empleado. Verificarlo.
 	    public void eliminarEmpleado(Empleado administrador, DoubleNode empleado) {
 	        if (administrador.isAdministrador()) {
 	            Empleados.remove(empleado);
@@ -30,7 +29,7 @@
 	            System.out.println("Acción no permitida. Solo los administradores pueden eliminar empleados.");
 	        }
 	    }
-	
+
 	    public void cambiarContrasena(Empleado administrador, Empleado empleado, String nuevaContrasena) {
 	        if (administrador.isAdministrador()) {
 	            empleado.setContrasena(nuevaContrasena);
@@ -38,7 +37,6 @@
 	            System.out.println("Acción no permitida. Solo los administradores pueden cambiar contraseñas.");
 	        }
 	    }
-	    
 	    public DoubleList getEmpleados() {
 	    	return Empleados;
 	    }

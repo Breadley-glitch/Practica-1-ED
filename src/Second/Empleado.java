@@ -125,7 +125,29 @@ public class Empleado {
 				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "Admin=" +administrador+ "]";
 	}
 
-    
+    public void crearEmpleado(Empleado administrador, Registro registro, Empleado nuevoEmpleado) {
+        if (this.isAdministrador()) {
+            registro.nuevoEmpleado(nuevoEmpleado);
+        } else {
+            System.out.println("Acción no permitida. Solo los administradores pueden crear nuevos empleados.");
+        }
+    }
+
+    public void eliminarEmpleado(Empleado administrador, Registro registro, DoubleNode empleado) {
+        if (this.isAdministrador()) {
+            registro.eliminarEmpleado(administrador, empleado);
+        } else {
+            System.out.println("Acción no permitida. Solo los administradores pueden eliminar empleados.");
+        }
+    }
+
+    public void cambiarContrasena(Empleado administrador, Registro registro, Empleado empleado, String nuevaContrasena) {
+        if (this.isAdministrador()) {
+            registro.cambiarContrasena(administrador, empleado, nuevaContrasena);
+        } else {
+            System.out.println("Acción no permitida. Solo los administradores pueden cambiar contraseñas.");
+        }
+    }
     
 }
 

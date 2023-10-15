@@ -20,11 +20,9 @@ public class Test2 {
         Empleado user2 = new Empleado(3L, "User2", "user123");
         registro.newEmpleado(user2);
         
-        registro.imprimirEmpleados();
         // Specify absolute file paths for Empleados.txt and Password.txt
-        String empleadosFilePath = "C:/Users/jossh/OneDrive/Documents/GitHub/Practica-1-ED/Empleados.txt";
-        String passwordFilePath = "C:/Users/jossh/OneDrive/Documents/GitHub/Practica-1-ED/Password.txt";
-
+        String empleadosFilePath ="C:/Users/jhon/Documents/GitHub/Practica-1-ED/Empleados.txt";
+        String passwordFilePath ="C:/Users/jhon/Documents/GitHub/Practica-1-ED/Password.txt";
         try (BufferedReader passwordReader = new BufferedReader(new FileReader(passwordFilePath))) {
             String passwordLine;
             int lineCount = 0;
@@ -85,6 +83,56 @@ public class Test2 {
             return;
         }
         System.out.println("¡Inicio de sesión exitoso! ¡Bienvenido, " + empleado.getNombre() + "!");
-    } 
-    }
+        while (true) {
+            System.out.println("Por favor, selecciona una opción: " + empleado.getNombre());
+            System.out.println("1. Leer mensaje");
+            System.out.println("2. Ver mensajes leídos");
+            if (empleado.isAdministrador()) {
+                System.out.println("3. Crear nuevo empleado");
+                System.out.println("4. Cambiar contraseña de empleado");
+                System.out.println("5. Eliminar empleado");
+            }
+            System.out.println("6. Salir");
+            
+            int opcion = scanner.nextInt();
+            
+            // Your existing code...
+            
+            if (opcion == 3 && empleado.isAdministrador()) {
+            	System.out.println("Introduce el nombre del nuevo empleado:");
+                String nombre = scanner.next();
+                System.out.println("Introduce el ID del nuevo empleado:");
+                long idc = scanner.nextLong();
+                System.out.println("Introduce la contraseña del nuevo empleado:");
+                String contrasenac = scanner.next();
+                
+                Empleado nuevoEmpleado = new Empleado(id, nombre, contrasena);
+                empleado.crearEmpleado(empleado, registro, nuevoEmpleado); 
+                
+            } else if (opcion == 4 && empleado.isAdministrador()) {
+            	System.out.println("Introduce el ID del empleado al que quieres cambiar la contraseña:");
+                long idEmpleado = scanner.nextLong();
+                Empleado empleadoACambiar = registro.buscarEmpleadoPorId(idEmpleado);
+                
+                if (empleadoACambiar != null) {
+                    System.out.println("Introduce la nueva contraseña:");
+                    String nuevaContrasena = scanner.next();
+                    empleado.cambiarContrasena(empleado, registro, empleadoACambiar, nuevaContrasena);
+                } else {
+                    System.out.println("No se encontró ningún empleado con este ID.");
+                }
+            } else if (opcion == 5 && empleado.isAdministrador()) {
+                registro.imprimirEmpleados();
 
+            } else if (opcion == 6) {
+                break;
+            } else {
+                System.out.println("Opción no válida. Por favor, intenta de nuevo.");
+            }
+        }
+        
+        scanner.close();
+    } 
+}
+     
+    

@@ -1,27 +1,30 @@
 package Second;
 
-public class BandejaDeEntrada {
-	private DoubleList mensajes;
-	
-	public BandejaDeEntrada() {
-		mensajes = new DoubleList();
-	}
-	
-	public void enviarMensajes(long id, String titulo, String mensaje) {
-		
-	}
-	public DoubleList getMensajes() {
+public class BandejaDeEntrada extends Mensaje {
+    private DoubleList mensajes;
+
+    public BandejaDeEntrada() {
+        super(0, "", "");
+        mensajes = new DoubleList();
+    }
+
+    public void enviarMensajes(long id, String titulo, String mensaje) {
+
+    }
+
+    public DoubleList getMensajes() {
         return mensajes;
     }
-	public void recibirMensaje(Object mensaje) {
-	        mensajes.addFirst(mensaje);
-	}
-	 
-	public Object leerMensaje() {
-	    if (!mensajes.isEmpty()) {
-	        return mensajes.removeFirst();
-	    } else {
-	        return null;
-	    }
-	}
+
+    public void recibirMensaje(Object mensaje) {
+        mensajes.addFirst(mensaje);
+    }
+
+    public Object leerMensaje() {
+        if (!mensajes.isEmpty()) {
+            return mensajes.removeFirst();
+        } else {
+            return null;
+        }
+    }
 }
