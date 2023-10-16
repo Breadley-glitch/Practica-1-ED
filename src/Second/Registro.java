@@ -13,29 +13,19 @@
 	
 	    
 	    public Empleado nuevoEmpleado(Empleado nuevoEmpleado) {
-	        if (nuevoEmpleado.isAdministrador()) {
 	            Empleados.addFirst(nuevoEmpleado);
 	            return nuevoEmpleado;
-	        } else {
-	            System.out.println("Acción no permitida. Solo los administradores pueden crear nuevos empleados.");
-	            return null;
-	        }
+	      
 	    }
 	    
 	    public void eliminarEmpleado(Empleado administrador, DoubleNode empleado) {
-	        if (administrador.isAdministrador()) {
 	            Empleados.remove(empleado);
-	        } else {
-	            System.out.println("Acción no permitida. Solo los administradores pueden eliminar empleados.");
-	        }
 	    }
 
 	    public void cambiarContrasena(Empleado administrador, Empleado empleado, String nuevaContrasena) {
-	        if (administrador.isAdministrador()) {
+	        
 	            empleado.setContrasena(nuevaContrasena);
-	        } else {
-	            System.out.println("Acción no permitida. Solo los administradores pueden cambiar contraseñas.");
-	        }
+	       
 	    }
 	    public DoubleList getEmpleados() {
 	    	return Empleados;
@@ -59,5 +49,18 @@
 	            System.out.println(empleado.toString());
 	            actual = actual.getNext();
 	        }
+	    }
+	    public void eliminarEmpleadoPorId(long id) {
+	        DoubleNode actual = Empleados.first();
+	        while (actual != null) {
+	            Empleado empleado = (Empleado) actual.getData();
+	            if (empleado.getId() == id) {
+	                Empleados.remove(actual);
+	                System.out.println("Empleado con ID " + id + " ha sido eliminado.");
+	                return;
+	            }
+	            actual = actual.getNext();
+	        }
+	        System.out.println("No se encontró ningún empleado con el ID " + id + ".");
 	    }
 	}

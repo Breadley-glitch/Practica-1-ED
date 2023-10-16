@@ -12,7 +12,8 @@ public class Test2 {
         
         Empleado admin1 = new Empleado("Admin", 1, 1, 1, 2000, "CiudadAdmin", 1234567890L, "admin@empresa.com", "CalleAdmin", "1A", "BarrioAdmin", "CiudadAdmin", "admin123", "administrador");
         registro.newEmpleado(admin1);
-
+        Mensaje mensajeAdmin = new Mensaje(1, "Título del mensaje", "Cuerpo del mensaje");
+        admin1.getBandejaDeEntrada().recibirMensaje(mensajeAdmin);
         // Crear un usuario normal
         Empleado user = new Empleado(2L, "User", "user123");
         registro.newEmpleado(user);
@@ -69,70 +70,166 @@ public class Test2 {
         } catch (IOException e) {
             System.err.println("Error reading Password.txt: " + e.getMessage());
         }
-        System.out.println("Por favor, introduce tu ID:");
-        long id = scanner.nextLong();
-        Empleado empleado = registro.buscarEmpleadoPorId(id);
-        if (empleado == null) {
-            System.out.println("No se encontró ningún empleado con este ID.");
-            return;
-        }
-        System.out.println("Por favor, introduce tu contraseña:");
-        String contrasena = scanner.next();
-        if (!empleado.getContrasena().equals(contrasena)) {
-            System.out.println("Contraseña incorrecta.");
-            return;
-        }
-        System.out.println("¡Inicio de sesión exitoso! ¡Bienvenido, " + empleado.getNombre() + "!");
+        
+        
+        //Interfaz
         while (true) {
-            System.out.println("Por favor, selecciona una opción: " + empleado.getNombre());
-            System.out.println("1. Leer mensaje");
-            System.out.println("2. Ver mensajes leídos");
-            if (empleado.isAdministrador()) {
-                System.out.println("3. Crear nuevo empleado");
-                System.out.println("4. Cambiar contraseña de empleado");
-                System.out.println("5. Eliminar empleado");
+            System.out.println("Por favor, introduce tu ID:");
+            long id = scanner.nextLong();
+            Empleado empleado = registro.buscarEmpleadoPorId(id);
+            if (empleado == null) {
+                System.out.println("No se encontró ningún empleado con este ID.");
+                continue;
             }
-            System.out.println("6. Salir");
-            
-            int opcion = scanner.nextInt();
-            
-            // Your existing code...
-            
-            if (opcion == 3 && empleado.isAdministrador()) {
-            	System.out.println("Introduce el nombre del nuevo empleado:");
-                String nombre = scanner.next();
-                System.out.println("Introduce el ID del nuevo empleado:");
+            System.out.println("Por favor, introduce tu contraseña:");
+            String contrasena = scanner.next();
+            if (!empleado.getContrasena().equals(contrasena)) {
+                System.out.println("Contraseña incorrecta.");
+                continue;
+            }
+            System.out.println("¡Inicio de sesión exitoso! ¡Bienvenido, " + empleado.getNombre() + "!");
+
+            while (true) {
+                System.out.println("Por favor, selecciona una opción: " + empleado.getNombre());
+                System.out.println("1. Enviar mensaje");
+                System.out.println("2. Bandeja de entrada");
+                if (empleado.isAdministrador()) {
+                    System.out.println("3. Crear nuevo empleado");
+                    System.out.println("4. Cambiar contraseña de empleado");
+                    System.out.println("5. Eliminar empleado");
+                    System.out.println("6.Ver empleados");
+                }
+                System.out.println("7. Salir");
+
+                int opcion = scanner.nextInt();
+                scanner.nextLine();
+            switch (opcion) {
+
+            	
+            case 1:
+                System.out.println("Introduce la cédula del usuario al que quieres enviar el mensaje:");
                 long idc = scanner.nextLong();
-                System.out.println("Introduce la contraseña del nuevo empleado:");
-                String contrasenac = scanner.next();
+                Empleado empleadoExistente = registro.buscarEmpleadoPorId(idc);
+                if (empleadoExistente == null) {
+                    System.out.println("ID inexistente. Prueba con otra ID.");
+                    continue; // Vuelve al menú principal
+                } else {
+                    System.out.println("Introduce el título del mensaje:");
+                    String titulo = scanner.next();
+                    System.out.println("Introduce el mensaje:");
+                    String cuerpo = scanner.next();
+                    System.out.println("¿Qué te gustaría hacer con este mensaje?");
+                    System.out.println("1. Enviar");
+                    System.out.println("2. Descartar");
+                    System.out.println("3. Guardar como borrador");
+                    int opcionMensaje = scanner.nextInt();
+                    scanner.nextLine(); // Consumir la nueva línea pendiente
+                    switch (opcionMensaje) {
+                        case 1:
+                            // Enviar el mensaje
+                            empleado.redactarMensaje(registro, idc, titulo, cuerpo);
+                            System.out.println("Mensaje enviado exitosamente.");
+                            break;
+                        case 2:
+                            // Descartar el mensaje
+                            System.out.println("Mensaje descartado.");
+                            break;
+                        case 3:
+                            // Guardar el mensaje como borrador
+                            empleado.guardarBorrador(titulo, cuerpo);
+                            System.out.println("Mensaje guardado como borrador.");
+                            break;
+                        default:
+                            System.out.println("Opción no válida. Por favor, intenta de nuevo.");
+                            break;
+                    }
+                }
+                continue; // Vuelve al menú principal
+             // ...
+
+             case 2:
+            	 if (empleado.isAdministrador()) {
+            	        System.out.println("Bandeja de entrada:");
+            	        // Llamada al método para imprimir los mensajes en la bandeja de entrada
+            	        empleado.getBandejaDeEntrada().imprimirMensajes();
+            	        System.out.println("Por favor, introduce el número del mensaje que quieres leer:");
+            	        int numeroMensaje = scanner.nextInt();
+            	        scanner.nextLine(); // Consumir la nueva línea pendiente
+            	        empleado.consultarBandejaDeEntrada(numeroMensaje);
+            	    } else {
+            	        System.out.println("No tienes permisos para realizar esta acción.");
+            	    }
+            	    continue; 
+                    
                 
-                Empleado nuevoEmpleado = new Empleado(id, nombre, contrasena);
-                empleado.crearEmpleado(empleado, registro, nuevoEmpleado); 
+        case 3:
+            if (empleado.isAdministrador()) {
+                System.out.println("Introduce el nombre del nuevo empleado:");
+                String nombre = scanner.nextLine();
+                System.out.println("Introduce el ID del nuevo empleado:");
+                long idc1 = scanner.nextLong();
+                // Verificar si el ID ya existe
+                Empleado empleadoExistente1 = registro.buscarEmpleadoPorId(idc1);
+                if (empleadoExistente1 != null) {
+                    System.out.println("ID existente. Prueba con otra ID.");
+                    continue; // Vuelve al menú principal
+                } else {
+                    System.out.println("Introduce la contraseña del nuevo empleado:");
+                    String contrasenac = scanner.next();
+                    Empleado nuevoEmpleado = new Empleado(idc1, nombre, contrasenac);
+                    empleado.crearEmpleado(empleado, registro, nuevoEmpleado); 
+                    System.out.println("Empleado creado exitosamente.");
+                }
+            } else {
+                System.out.println("No tienes permisos para realizar esta acción.");
+            }
+            continue;
+        
+            
                 
-            } else if (opcion == 4 && empleado.isAdministrador()) {
-            	System.out.println("Introduce el ID del empleado al que quieres cambiar la contraseña:");
+        case 4:
+            if (empleado.isAdministrador()) {
+                System.out.println("Introduce el ID del empleado al que quieres cambiar la contraseña:");
                 long idEmpleado = scanner.nextLong();
                 Empleado empleadoACambiar = registro.buscarEmpleadoPorId(idEmpleado);
                 
                 if (empleadoACambiar != null) {
                     System.out.println("Introduce la nueva contraseña:");
-                    String nuevaContrasena = scanner.next();
+                    String nuevaContrasena = scanner.nextLine();
                     empleado.cambiarContrasena(empleado, registro, empleadoACambiar, nuevaContrasena);
+                    System.out.println("Contraseña cambiada exitosamente.");
                 } else {
                     System.out.println("No se encontró ningún empleado con este ID.");
                 }
-            } else if (opcion == 5 && empleado.isAdministrador()) {
-                registro.imprimirEmpleados();
-
-            } else if (opcion == 6) {
-                break;
             } else {
-                System.out.println("Opción no válida. Por favor, intenta de nuevo.");
+                System.out.println("No tienes permisos para realizar esta acción.");
             }
-        }
-        
-        scanner.close();
+            continue; // Vuelve al menú principal
+
+        case 5:
+            if (empleado.isAdministrador()) {
+                System.out.println("Introduce el ID del empleado que quieres eliminar:");
+                long idEmpleado = scanner.nextLong();
+                registro.eliminarEmpleadoPorId(idEmpleado);
+                System.out.println("Empleado eliminado exitosamente.");
+            } else {
+                System.out.println("No tienes permisos para realizar esta acción.");
+            }
+            continue; // Vuelve al menú principal
+        case 6:
+            if (empleado.isAdministrador()) {
+                System.out.println("Lista de empleados:");
+                registro.imprimirEmpleados();
+            } else {
+                System.out.println("No tienes permisos para realizar esta acción.");
+            }
+            continue;
+        case 7:
+            System.out.println("Saliendo...");
+            System.exit(0);
+
     } 
 }
-     
+}    }
     
+}

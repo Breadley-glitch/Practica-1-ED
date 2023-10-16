@@ -27,4 +27,14 @@ public class BandejaDeEntrada extends Mensaje {
             return null;
         }
     }
+    public void imprimirMensajes() {
+        DoubleNode actual = mensajes.first();
+        int i = 1;
+        while (actual != null) {
+            Mensaje mensaje = (Mensaje) actual.getData();
+            System.out.println(i + ". Fecha: " + mensaje.getFecha() + ", Título: " + mensaje.getTitulo());
+            actual = actual.getNext();
+            i++;
+        }
+    }
 }

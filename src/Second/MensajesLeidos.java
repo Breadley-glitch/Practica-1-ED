@@ -13,6 +13,11 @@ public class MensajesLeidos extends Mensaje {
     }
 
     public Object obtenerSiguienteMensaje() {
-        return mensajes.dequeue();
+        if (!mensajes.isEmpty()) {
+            return mensajes.dequeue();
+        } else {
+            System.out.println("No hay más mensajes leídos.");
+            return null;
+        }
     }
 }

@@ -11,6 +11,7 @@ public class Empleado {
     private boolean administrador;
     private BandejaDeEntrada bandejaDeEntrada;
     private MensajesLeidos mensajesLeidos;
+    private Borrador borrador;
     private String contrasena;
     
     
@@ -27,6 +28,7 @@ public class Empleado {
         this.contrasena=contrasena;
         this.bandejaDeEntrada = new BandejaDeEntrada();
         this.mensajesLeidos = new MensajesLeidos();
+        this.borrador = new Borrador();
     }
     public Empleado(Long id, String nombre, String contrasena) {
         this.id = id;
@@ -126,29 +128,66 @@ public class Empleado {
 	}
 
     public void crearEmpleado(Empleado administrador, Registro registro, Empleado nuevoEmpleado) {
-        if (this.isAdministrador()) {
             registro.nuevoEmpleado(nuevoEmpleado);
-        } else {
-            System.out.println("Acción no permitida. Solo los administradores pueden crear nuevos empleados.");
-        }
+
     }
 
     public void eliminarEmpleado(Empleado administrador, Registro registro, DoubleNode empleado) {
-        if (this.isAdministrador()) {
             registro.eliminarEmpleado(administrador, empleado);
-        } else {
-            System.out.println("Acción no permitida. Solo los administradores pueden eliminar empleados.");
-        }
+       
     }
 
     public void cambiarContrasena(Empleado administrador, Registro registro, Empleado empleado, String nuevaContrasena) {
-        if (this.isAdministrador()) {
             registro.cambiarContrasena(administrador, empleado, nuevaContrasena);
+        }  
+    public void redactarMensaje(Registro registro, long idUsuario, String titulo, String cuerpo) {
+        Empleado destinatario = registro.buscarEmpleadoPorId(idUsuario);
+        if (destinatario != null) {
+            Mensaje mensaje = new Mensaje((int) this.id, titulo, cuerpo); 
+            enviarMensaje(destinatario, mensaje);
         } else {
-            System.out.println("Acción no permitida. Solo los administradores pueden cambiar contraseñas.");
+            System.out.println("No se encontró ningún usuario con esta cédula.");
+        }
+        
+    
+    }        
+    public void leerMensaje(int numero) {
+        DoubleNode actual = bandejaDeEntrada.getMensajes().first();
+        for (int i = 1; i < numero; i++) {
+            if (actual != null) {
+                actual = actual.getNext();
+            } else {
+                System.out.println("No existe un mensaje con este número.");
+                return;
+            }
+        }
+        if (actual != null) {
+            Mensaje mensaje = (Mensaje) actual.getData();
+            System.out.println("Fecha: " + mensaje.getFecha() + ", Título: " + mensaje.getTitulo() + ", Cuerpo: " + mensaje.getCuerpo());
+            // Añadir el mensaje a la cola de mensajes leídos
+            mensajesLeidos.agregarMensaje(mensaje);
+            // Eliminar el mensaje de la bandeja de entrada
+            bandejaDeEntrada.getMensajes().remove(actual);
+        } else {
+            System.out.println("No existe un mensaje con este número.");
         }
     }
-    
+    public void consultarBandejaDeEntrada(int numeroMensaje) {
+        DoubleNode actual = bandejaDeEntrada.getMensajes().first();
+        int i = 1;
+        while (actual != null) {
+            Mensaje mensaje = (Mensaje) actual.getData();
+            System.out.println(i + ". Fecha: " + mensaje.getFecha() + ", Título: " + mensaje.getTitulo());
+            actual = actual.getNext();
+            i++;
+        }
+        leerMensaje(numeroMensaje);
+
+    }
+    public void guardarBorrador(String titulo, String cuerpo) {
+        Mensaje mensaje = new Mensaje((int) this.id, titulo, cuerpo);
+        borrador.agregarBorrador(mensaje);
+    }
 }
 
 
