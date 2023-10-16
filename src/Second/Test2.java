@@ -1,7 +1,9 @@
 package Second;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,8 +14,6 @@ public class Test2 {
         
         Empleado admin1 = new Empleado("Admin", 1, 1, 1, 2000, "CiudadAdmin", 1234567890L, "admin@empresa.com", "CalleAdmin", "1A", "BarrioAdmin", "CiudadAdmin", "admin123", "administrador");
         registro.newEmpleado(admin1);
-        Mensaje mensajeAdmin = new Mensaje(1, "Título del mensaje", "Cuerpo del mensaje");
-        admin1.getBandejaDeEntrada().recibirMensaje(mensajeAdmin);
         // Crear un usuario normal
         Empleado user = new Empleado(2L, "User", "user123");
         registro.newEmpleado(user);
@@ -22,8 +22,8 @@ public class Test2 {
         registro.newEmpleado(user2);
         
         // Specify absolute file paths for Empleados.txt and Password.txt
-        String empleadosFilePath ="C:/Users/jhon/Documents/GitHub/Practica-1-ED/Empleados.txt";
-        String passwordFilePath ="C:/Users/jhon/Documents/GitHub/Practica-1-ED/Password.txt";
+        String empleadosFilePath ="src/Empleados.txt";
+        String passwordFilePath ="src/Password.txt";
         try (BufferedReader passwordReader = new BufferedReader(new FileReader(passwordFilePath))) {
             String passwordLine;
             int lineCount = 0;
@@ -88,8 +88,10 @@ public class Test2 {
                 continue;
             }
             System.out.println("¡Inicio de sesión exitoso! ¡Bienvenido, " + empleado.getNombre() + "!");
+            
+            boolean loggedIn = true;
 
-            while (true) {
+            while (loggedIn) {
                 System.out.println("Por favor, selecciona una opción: " + empleado.getNombre());
                 System.out.println("1. Enviar mensaje");
                 System.out.println("2. Bandeja de entrada");
@@ -99,7 +101,10 @@ public class Test2 {
                     System.out.println("5. Eliminar empleado");
                     System.out.println("6.Ver empleados");
                 }
-                System.out.println("7. Salir");
+                System.out.println("7. Cerrar sesión");
+                System.out.println("8. Salir");
+                System.out.println("9. Bandeja de Leidos");
+                System.out.println("10. Bandeja de Borrador");
 
                 int opcion = scanner.nextInt();
                 scanner.nextLine();
@@ -107,7 +112,7 @@ public class Test2 {
 
             	
             case 1:
-                System.out.println("Introduce la cédula del usuario al que quieres enviar el mensaje:");
+                System.out.println("Introduce el id del usuario al que quieres enviar el mensaje:");
                 long idc = scanner.nextLong();
                 Empleado empleadoExistente = registro.buscarEmpleadoPorId(idc);
                 if (empleadoExistente == null) {
@@ -148,42 +153,58 @@ public class Test2 {
              // ...
 
              case 2:
-            	 if (empleado.isAdministrador()) {
             	        System.out.println("Bandeja de entrada:");
             	        // Llamada al método para imprimir los mensajes en la bandeja de entrada
             	        empleado.getBandejaDeEntrada().imprimirMensajes();
             	        System.out.println("Por favor, introduce el número del mensaje que quieres leer:");
             	        int numeroMensaje = scanner.nextInt();
             	        scanner.nextLine(); // Consumir la nueva línea pendiente
-            	        empleado.consultarBandejaDeEntrada(numeroMensaje);
-            	    } else {
-            	        System.out.println("No tienes permisos para realizar esta acción.");
-            	    }
+            	        empleado.consultarBandejaDeEntrada(numeroMensaje);   
+            	        
             	    continue; 
                     
                 
-        case 3:
-            if (empleado.isAdministrador()) {
-                System.out.println("Introduce el nombre del nuevo empleado:");
-                String nombre = scanner.nextLine();
-                System.out.println("Introduce el ID del nuevo empleado:");
-                long idc1 = scanner.nextLong();
-                // Verificar si el ID ya existe
-                Empleado empleadoExistente1 = registro.buscarEmpleadoPorId(idc1);
-                if (empleadoExistente1 != null) {
-                    System.out.println("ID existente. Prueba con otra ID.");
-                    continue; // Vuelve al menú principal
-                } else {
-                    System.out.println("Introduce la contraseña del nuevo empleado:");
-                    String contrasenac = scanner.next();
-                    Empleado nuevoEmpleado = new Empleado(idc1, nombre, contrasenac);
-                    empleado.crearEmpleado(empleado, registro, nuevoEmpleado); 
-                    System.out.println("Empleado creado exitosamente.");
-                }
-            } else {
-                System.out.println("No tienes permisos para realizar esta acción.");
-            }
-            continue;
+             case 3:
+            	    if (empleado.isAdministrador()) {
+            	        System.out.println("Introduce el nombre del nuevo empleado:");
+            	        String nombre = scanner.nextLine();
+            	        System.out.println("Introduce el ID del nuevo empleado:");
+            	        long idc1 = scanner.nextLong();
+            	        // Verificar si el ID ya existe
+            	        Empleado empleadoExistente1 = registro.buscarEmpleadoPorId(idc1);
+            	        if (empleadoExistente1 != null) {
+            	            System.out.println("ID existente. Prueba con otra ID.");
+            	            continue; // Vuelve al menú principal
+            	        } else {
+            	            System.out.println("Introduce la contraseña del nuevo empleado:");
+            	            String contrasenac = scanner.next();
+            	            Empleado nuevoEmpleado = new Empleado(idc1, nombre, contrasenac);
+            	            empleado.crearEmpleado(empleado, registro, nuevoEmpleado); 
+            	            System.out.println("Empleado creado exitosamente.");
+
+            	            // Actualizar Empleados.txt
+            	            try (FileWriter empleadosWriter = new FileWriter(empleadosFilePath, true);
+            	                 BufferedWriter empleadosBufferedWriter = new BufferedWriter(empleadosWriter)) {
+            	                empleadosBufferedWriter.write(nombre + " " + idc1 + " 0 0 0 null 0 null null null null null");
+            	                empleadosBufferedWriter.newLine();
+            	            } catch (IOException e) {
+            	                System.err.println("Error writing to Empleados.txt: " + e.getMessage());
+            	            }
+
+            	            // Actualizar Password.txt
+            	            try (FileWriter passwordWriter = new FileWriter(passwordFilePath, true);
+            	                 BufferedWriter passwordBufferedWriter = new BufferedWriter(passwordWriter)) {
+            	                passwordBufferedWriter.write(idc1 + " " + contrasenac + " empleado");
+            	                passwordBufferedWriter.newLine();
+            	            } catch (IOException e) {
+            	                System.err.println("Error writing to Password.txt: " + e.getMessage());
+            	            }
+            	        }
+            	    } else {
+            	        System.out.println("No tienes permisos para realizar esta acción.");
+            	    }
+            	    continue;
+
         
             
                 
@@ -225,11 +246,18 @@ public class Test2 {
             }
             continue;
         case 7:
+        	System.out.println("Cerrando sesión...");
+        	loggedIn =false;
+        	break;
+        case 8:
             System.out.println("Saliendo...");
             System.exit(0);
+        case 9:
+        	System.out.println("Bandeja de Leídos:");
+        	empleado.getMensajesLeidos().imprimirMensajes();
 
+            	} 
+            }
+        }    
     } 
-}
-}    }
-    
 }

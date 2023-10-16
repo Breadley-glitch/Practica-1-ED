@@ -2,14 +2,15 @@ package Second;
 
 public class BandejaDeEntrada extends Mensaje {
     private DoubleList mensajes;
+    private Mensaje mensaje;
 
     public BandejaDeEntrada() {
         super(0, "", "");
         mensajes = new DoubleList();
     }
 
-    public void enviarMensajes(long id, String titulo, String mensaje) {
-
+    public void enviarMensajes(Mensaje mensaje, long id) {
+    	
     }
 
     public DoubleList getMensajes() {
