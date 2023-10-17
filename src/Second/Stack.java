@@ -1,6 +1,6 @@
 package Second;
 
-public class Stack extends List {
+public class Stack {
 	private List data;
 	
 	public Stack() {
@@ -9,6 +9,10 @@ public class Stack extends List {
 	
 	public int size() {
 		return data.size();
+	}
+	
+	public boolean isEmpty() {
+		return size()==0;
 	}
 	
 	public void push(Object e) {

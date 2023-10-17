@@ -140,10 +140,26 @@ public class Test2 {
                             System.out.println("Mensaje descartado.");
                             break;
                         case 3:
-                            // Guardar el mensaje como borrador
-                            empleado.guardarBorrador(titulo, cuerpo);
+                            Mensaje mes = new Mensaje(id, titulo, cuerpo);
+                            empleado.guardarBorrador(mes);
                             System.out.println("Mensaje guardado como borrador.");
+
+                            // Get the Borrador object
+                            Borrador borrador = empleado.getBandejaDeBorrador();
+                            
+                            // Get the draft messages from the Borrador
+                            Stack mensajes = borrador.getMensajes();
+
+                            System.out.println("Borrador:");
+                            
+                            // Iterate through and print the draft messages
+                                Mensaje draftMessage = (Mensaje) mensajes.top();
+                                System.out.println("Título: " + draftMessage.getTitulo());
+                                System.out.println("Cuerpo: " + draftMessage.getCuerpo());
+                                System.out.println();
+                            
                             break;
+
                         default:
                             System.out.println("Opción no válida. Por favor, intenta de nuevo.");
                             break;
@@ -255,6 +271,26 @@ public class Test2 {
         case 9:
         	System.out.println("Bandeja de Leídos:");
         	empleado.getMensajesLeidos().imprimirMensajes();
+        	break;
+        case 10:
+            Borrador borrador = empleado.getBandejaDeBorrador(); // Get the Borrador object from the employee
+            System.out.println("Borrador:");
+            
+            // Get the draft messages from the Borrador
+            Stack mensajes = borrador.getMensajes();
+
+            // Iterate through and print the draft messages
+            
+                Mensaje draftMessage = (Mensaje) mensajes.top();
+                System.out.println("Título: " + draftMessage.getTitulo());
+                System.out.println("Cuerpo: " + draftMessage.getCuerpo());
+                System.out.println();
+            
+            break;
+
+
+
+
 
             	} 
             }

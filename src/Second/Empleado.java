@@ -184,10 +184,15 @@ public class Empleado {
         leerMensaje(numeroMensaje);
 
     }
-    public void guardarBorrador(String titulo, String cuerpo) {
-        Mensaje mensaje = new Mensaje((int) this.id, titulo, cuerpo);
+    public void guardarBorrador(Mensaje mensaje) {
         borrador.agregarBorrador(mensaje);
     }
+
+    
+    public Borrador getBandejaDeBorrador() {
+        return borrador;
+    }
+
 }
 
 

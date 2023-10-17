@@ -2,7 +2,7 @@ package Second;
 
 public class BandejaDeEntrada extends Mensaje {
     private DoubleList mensajes;
-    private Mensaje mensaje;
+
 
     public BandejaDeEntrada() {
         super(0, "", "");

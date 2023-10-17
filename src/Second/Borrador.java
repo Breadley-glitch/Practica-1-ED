@@ -11,12 +11,15 @@ public class Borrador {
 	        mensajes.push(mensaje);
 	    }
 
-	    public Mensaje obtenerUltimoBorrador() {
-	        return (Mensaje) mensajes.top();
+	    public Object obtenerUltimoBorrador() {
+	        return mensajes.top();
 	    }
 
 	    public Mensaje enviarUltimoBorrador() {
 	        return (Mensaje) mensajes.pop();
+	    }
+	    public Stack getMensajes() {
+	    	return mensajes;
 	    }
 	}
 

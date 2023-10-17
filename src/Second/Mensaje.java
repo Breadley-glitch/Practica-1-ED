@@ -2,18 +2,18 @@ package Second;
 import java.util.Date;
 
 public class Mensaje {
-	protected int id;
+protected long id;
 protected String titulo;
 protected String cuerpo;
 protected Date fecha;
 
-public Mensaje(int id, String titulo, String cuerpo) {
+public Mensaje(long id, String titulo, String cuerpo) {
     this.id = id;
     this.titulo = titulo;
     this.cuerpo = cuerpo;
     this.fecha = new Date();
 }
-public int getId() {
+public long getId() {
     return id;
 }
 
