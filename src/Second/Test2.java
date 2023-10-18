@@ -274,20 +274,46 @@ public class Test2 {
         	break;
         case 10:
             Borrador borrador = empleado.getBandejaDeBorrador(); // Get the Borrador object from the employee
+            Stack mensajes = borrador.getMensajes(); // Get the draft messages from the Borrador
+
+            if (mensajes.isEmpty()) {
+                System.out.println("No tienes borradores.");
+                break;
+            }
+
             System.out.println("Borrador:");
             
-            // Get the draft messages from the Borrador
-            Stack mensajes = borrador.getMensajes();
-
             // Iterate through and print the draft messages
-            
-                Mensaje draftMessage = (Mensaje) mensajes.top();
-                System.out.println("Título: " + draftMessage.getTitulo());
-                System.out.println("Cuerpo: " + draftMessage.getCuerpo());
-                System.out.println();
-            
-            break;
+            Mensaje draftMessage = (Mensaje) mensajes.top();
+            System.out.println("Título: " + draftMessage.getTitulo());
+            System.out.println("Cuerpo: " + draftMessage.getCuerpo());
+            System.out.println();
 
+            // Ask the user what they want to do with the draft message
+            System.out.println("¿Qué te gustaría hacer con este mensaje?");
+            System.out.println("1. Enviar");
+            System.out.println("2. Descartar");
+            int opcionMensaje = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea pendiente
+
+            switch (opcionMensaje) {
+                case 1:
+                    // Send the message
+                    // You'll need to ask for the recipient's ID and use it here
+                    long idc1 = scanner.nextLong();
+                    empleado.redactarMensaje(registro, idc1, draftMessage.getTitulo(), draftMessage.getCuerpo());
+                    System.out.println("Mensaje enviado exitosamente.");
+                    break;
+                case 2:
+                    // Discard the message
+                    mensajes.pop(); // Remove the message from the top of the stack
+                    System.out.println("Mensaje descartado.");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, intenta de nuevo.");
+                    break;
+            }
+            break;
 
 
 
