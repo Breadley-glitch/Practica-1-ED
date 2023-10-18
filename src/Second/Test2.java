@@ -168,16 +168,20 @@ public class Test2 {
                 continue; // Vuelve al menú principal
              // ...
 
-             case 2:
-            	        System.out.println("Bandeja de entrada:");
-            	        // Llamada al método para imprimir los mensajes en la bandeja de entrada
-            	        empleado.getBandejaDeEntrada().imprimirMensajes();
-            	        System.out.println("Por favor, introduce el número del mensaje que quieres leer:");
-            	        int numeroMensaje = scanner.nextInt();
-            	        scanner.nextLine(); // Consumir la nueva línea pendiente
-            	        empleado.consultarBandejaDeEntrada(numeroMensaje);   
-            	        
-            	    continue; 
+            case 2:
+                System.out.println("Bandeja de entrada:");
+                // Check if the inbox is empty
+                if (empleado.getBandejaDeEntrada().getMensajes().isEmpty()) {
+                    System.out.println("No tienes mensajes en tu bandeja de entrada.");
+                } else {
+                    // Call the method to print the messages in the inbox
+                    empleado.getBandejaDeEntrada().imprimirMensajes();
+                    System.out.println("Por favor, introduce el número del mensaje que quieres leer:");
+                    int numeroMensaje = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline
+                    empleado.consultarBandejaDeEntrada(numeroMensaje);
+                }
+                continue;
                     
                 
              case 3:
@@ -298,7 +302,7 @@ public class Test2 {
 
             switch (opcionMensaje) {
                 case 1:
-                    // Send the message
+                	System.out.println("ID de la persona que quieres agregar");
                     // You'll need to ask for the recipient's ID and use it here
                     long idc1 = scanner.nextLong();
                     empleado.redactarMensaje(registro, idc1, draftMessage.getTitulo(), draftMessage.getCuerpo());
