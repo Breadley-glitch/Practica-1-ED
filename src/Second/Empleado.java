@@ -200,6 +200,7 @@ public class Empleado {
     public Borrador getBandejaDeBorrador() {
         return borrador;
     }
+    
 
 }
 

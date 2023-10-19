@@ -63,7 +63,7 @@ public class Borrador{
 
 	            while (!mensajes.isEmpty()) {
 	                Mensaje mensaje = (Mensaje) mensajes.top();
-	                writer.write("Mensaje, " + numMensaje + ", id, " +mensaje.getId()+ ", Fecha, " + mensaje.getFecha() + ", Título, " + mensaje.getTitulo()+ ", Cuerpo, " + mensaje.getCuerpo());
+	                writer.write("MensajeD, " + numMensaje + ", id, " +mensaje.getId()+ ", Fecha, " + mensaje.getFecha() + ", Título, " + mensaje.getTitulo()+ ", Cuerpo, " + mensaje.getCuerpo());
 	                writer.newLine();
 	                numMensaje++;
 

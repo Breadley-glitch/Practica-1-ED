@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Test2 {
@@ -19,9 +23,9 @@ public class Test2 {
         // Specify absolute file paths for Empleados.txt and Password.txt
         String empleadosFilePath ="src/Empleados.txt";
         String passwordFilePath ="src/Password.txt";
-        String empleado1FilePath= "Practica-1-ED/Camila-Jimenez.txt";
-        String empleado2FilePath= "Practica-1-ED/Jhon.txt";
-        String empleado3FilePath= "Practica-1-ED/Joss.txt";
+        String empleado1FilePath= "C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Camila-Jimenez.txt";
+        String empleado2FilePath= "C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Jhon.txt";
+        String empleado3FilePath= "C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Joss.txt";
         
         try (BufferedReader passwordReader = new BufferedReader(new FileReader(passwordFilePath))) {
             String passwordLine;
@@ -70,6 +74,138 @@ public class Test2 {
             System.err.println("Error reading Password.txt: " + e.getMessage());
         }
         
+        Empleado empleadoPorID = registro.buscarEmpleadoPorId(1);
+        Empleado empleadoPorID2 = registro.buscarEmpleadoPorId(29);
+        Empleado empleadoPorID3 = registro.buscarEmpleadoPorId(13);
+        
+        //empleadoPorID.redactarMensaje(registro, 0, empleado2FilePath, empleado3FilePath);;
+        //empleadoPorID.getBandejaDeEntrada().recibirMensaje(null);
+        //empleadoPorID.getBandejaDeBorrador().agregarBorrador(null);
+        //empleadoPorID.getMensajesLeidos().agregarMensaje(null);
+        
+        //empleadoPorID2.redactarMensaje(registro, 0, empleado2FilePath, empleado3FilePath);;
+        //empleadoPorID2.getBandejaDeEntrada().recibirMensaje(null);
+        //empleadoPorID2.getBandejaDeBorrador().agregarBorrador(null);
+        //empleadoPorID2.getMensajesLeidos().agregarMensaje(null);
+        
+        //empleadoPorID3.redactarMensaje(registro, 0, empleado2FilePath, empleado3FilePath);;
+        //empleadoPorID3.getBandejaDeEntrada().recibirMensaje(null);
+        //empleadoPorID3.getBandejaDeBorrador().agregarBorrador(null);
+        //empleadoPorID3.getMensajesLeidos().agregarMensaje(null);
+        
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(empleado2FilePath))) {
+            String linea;
+            Mensaje mensaje = null;
+            
+            while ((linea = br.readLine()) != null) {
+                if (linea.startsWith("MensajeB, ") || linea.startsWith("MensajeL, ") || linea.startsWith("MensajeD, ")) {
+                    String[] partes = linea.split(", ");
+                    
+                    // Comprobar el tipo de mensaje (Bandeja de Entrada, Mensajes Leídos, Mensajes en Borrador)
+                    String tipoMensaje = partes[0];
+                    long id = Long.parseLong(partes[3]);
+                    String fechaStr = partes[5];
+                    String titulo = partes[7];
+                    String cuerpo = partes[9];
+                    
+                    Date fecha = convertirFecha(fechaStr);
+                    
+                    // Crear un nuevo mensaje con los valores extraídos
+                    mensaje = new Mensaje(id, titulo, cuerpo, fecha);
+
+                    // Procesar el mensaje según su tipo
+                    if (tipoMensaje.equals("MensajeB,")) {
+                        empleadoPorID3.getBandejaDeEntrada().recibirMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeL,")) {
+                        empleadoPorID3.getMensajesLeidos().agregarMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeD,")) {
+                        empleadoPorID3.getBandejaDeBorrador().agregarBorrador(mensaje);
+                    }
+                    
+                    System.out.println(mensaje.toString());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(empleado1FilePath))) {
+            String linea;
+            Mensaje mensaje = null;
+            
+            while ((linea = br.readLine()) != null) {
+                if (linea.startsWith("MensajeB, ") || linea.startsWith("MensajeL, ") || linea.startsWith("MensajeD, ")) {
+                    String[] partes = linea.split(", ");
+                    
+                    // Comprobar el tipo de mensaje (Bandeja de Entrada, Mensajes Leídos, Mensajes en Borrador)
+                    String tipoMensaje = partes[0];
+                    long id = Long.parseLong(partes[3]);
+                    String fechaStr = partes[5];
+                    String titulo = partes[7];
+                    String cuerpo = partes[9];
+                    
+                    Date fecha = convertirFecha(fechaStr);
+                    
+                    // Crear un nuevo mensaje con los valores extraídos
+                    mensaje = new Mensaje(id, titulo, cuerpo, fecha);
+
+                    // Procesar el mensaje según su tipo
+                    if (tipoMensaje.equals("MensajeB,")) {
+                        empleadoPorID.getBandejaDeEntrada().recibirMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeL,")) {
+                        empleadoPorID.getMensajesLeidos().agregarMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeD,")) {
+                        empleadoPorID.getBandejaDeBorrador().agregarBorrador(mensaje);
+                    }
+                    
+                    System.out.println(mensaje.toString());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(empleado3FilePath))) {
+            String linea;
+            Mensaje mensaje = null;
+            
+            while ((linea = br.readLine()) != null) {
+                if (linea.startsWith("MensajeB, ") || linea.startsWith("MensajeL, ") || linea.startsWith("MensajeD, ")) {
+                    String[] partes = linea.split(", ");
+                    
+                    // Comprobar el tipo de mensaje (Bandeja de Entrada, Mensajes Leídos, Mensajes en Borrador)
+                    String tipoMensaje = partes[0];
+                    long id = Long.parseLong(partes[3]);
+                    String fechaStr = partes[5];
+                    String titulo = partes[7];
+                    String cuerpo = partes[9];
+                    
+                    Date fecha = convertirFecha(fechaStr);
+                    
+                    // Crear un nuevo mensaje con los valores extraídos
+                    mensaje = new Mensaje(id, titulo, cuerpo, fecha);
+
+                    // Procesar el mensaje según su tipo
+                    if (tipoMensaje.equals("MensajeB,")) {
+                        empleadoPorID2.getBandejaDeEntrada().recibirMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeL,")) {
+                        empleadoPorID2.getMensajesLeidos().agregarMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeD,")) {
+                        empleadoPorID2.getBandejaDeBorrador().agregarBorrador(mensaje);
+                    }
+                    
+                    System.out.println(mensaje.toString());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+
+
+     
         
         //Interfaz
         while (true) {
@@ -405,5 +541,17 @@ public class Test2 {
             	} 
             }
         }    
-    } 
+    }
+    
+    
+    private static Date convertirFecha(String fechaString) {
+        fechaString = fechaString.replace(" COT", "");
+        SimpleDateFormat formato = new SimpleDateFormat("E MMM dd HH:mm:ss yyyy", Locale.ENGLISH);
+        try {
+            return formato.parse(fechaString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

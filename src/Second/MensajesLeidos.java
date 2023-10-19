@@ -77,7 +77,7 @@ public class MensajesLeidos{
                 Object mensaje = mensajes.dequeue();
                 if (mensaje instanceof Mensaje) {
                     Mensaje mensajeLeido = (Mensaje) mensaje;
-                    writer.write("Mensaje, " + numMensaje + ", id, " +mensajeLeido.getId()+ ", Fecha, " + mensajeLeido.getFecha() + ", Título, " + mensajeLeido.getTitulo()+ ", Cuerpo, " + mensajeLeido.getCuerpo());
+                    writer.write("MensajeL, " + numMensaje + ", id, " +mensajeLeido.getId()+ ", Fecha, " + mensajeLeido.getFecha() + ", Título, " + mensajeLeido.getTitulo()+ ", Cuerpo, " + mensajeLeido.getCuerpo());
                     writer.newLine();
                     numMensaje++;
                 }

@@ -2,13 +2,8 @@ Información del empleado:
 Empleado [nombre=Joss, id=29, contraseña=29, fecha de nacimiento=0/0/0, ciudad de nacimiento=null, direccion=Dirección{calle='null', noCalle=null, nomenclatura='null', barrio='null', ciudad='null'}, telefono=0, email=null,Admin=false]
 
 Mensajes en Bandeja de Entrada:
-
-Mensaje, 1, id, 1, Fecha, Wed Oct 18 21:18:28 COT 2023, Título, hola, Cuerpo, lol
-
+No hay mensajes en la bandeja de entrada.
 Mensajes Leídos:
-
-Mensaje, 1, id, 1, Fecha, Wed Oct 18 21:18:28 COT 2023, Título, hola, Cuerpo, lol
-
+No hay mensajes leídos.
 Mensajes en Borrador:
-
-Mensaje, 1, id, 1, Fecha, Wed Oct 18 21:18:28 COT 2023, Título, hola, Cuerpo, lol
+No hay mensajes en el borrador.
