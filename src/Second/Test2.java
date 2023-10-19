@@ -26,6 +26,7 @@ public class Test2 {
         String empleado1FilePath= "C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Camila-Jimenez.txt";
         String empleado2FilePath= "C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Jhon.txt";
         String empleado3FilePath= "C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Joss.txt";
+        String empleado4FilePath ="C:\\Users\\jossh\\OneDrive\\Documents\\GitHub\\Practica-1-ED\\Juan.txt";
         
         try (BufferedReader passwordReader = new BufferedReader(new FileReader(passwordFilePath))) {
             String passwordLine;
@@ -77,6 +78,7 @@ public class Test2 {
         Empleado empleadoPorID = registro.buscarEmpleadoPorId(1);
         Empleado empleadoPorID2 = registro.buscarEmpleadoPorId(29);
         Empleado empleadoPorID3 = registro.buscarEmpleadoPorId(13);
+        Empleado empleadoPorID4 = registro.buscarEmpleadoPorId(8);
         
         //empleadoPorID.redactarMensaje(registro, 0, empleado2FilePath, empleado3FilePath);;
         //empleadoPorID.getBandejaDeEntrada().recibirMensaje(null);
@@ -214,7 +216,46 @@ public class Test2 {
             e.printStackTrace();
         }
     
+        try (BufferedReader br = new BufferedReader(new FileReader(empleado4FilePath))) {
+            String linea;
+            Mensaje mensaje = null;
+            
+            while ((linea = br.readLine()) != null) {
+                if (linea.startsWith("MensajeB, ") || linea.startsWith("MensajeL, ") || linea.startsWith("MensajeD, ")) {
+                    String[] partes = linea.split(", ");
+                    
+                    // Comprobar el tipo de mensaje (Bandeja de Entrada, Mensajes Leídos, Mensajes en Borrador)
+                    String tipoMensaje = partes[0];
+                    long id = Long.parseLong(partes[3]);
+                    String fechaStr = partes[5];
+                    String titulo = partes[7];
+                    String cuerpo = partes[9];
+                    
+                    Date fecha = convertirFecha(fechaStr);
+                    
+                    // Crear un nuevo mensaje con los valores extraídos
+                    mensaje = new Mensaje(id, titulo, cuerpo, fecha);
+                    System.out.println("Tipo de mensaje: " + tipoMensaje);
 
+
+                    // Procesar el mensaje según su tipo
+                    if (tipoMensaje.equals("MensajeB")) {
+                        empleadoPorID4.getBandejaDeEntrada().recibirMensaje(mensaje);
+                        System.out.println("Agregado" );
+                    } else if (tipoMensaje.equals("MensajeL")) {
+                        System.out.println("Agregado" );
+                        empleadoPorID4.getMensajesLeidos().agregarMensaje(mensaje);
+                    } else if (tipoMensaje.equals("MensajeD")) {
+                        System.out.println("Agregado" );
+                        empleadoPorID4.guardarBorrador(mensaje);
+                    }
+                    
+                    System.out.println(mensaje.toString());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
      
         
