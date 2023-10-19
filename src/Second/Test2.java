@@ -113,14 +113,19 @@ public class Test2 {
                     
                     // Crear un nuevo mensaje con los valores extraídos
                     mensaje = new Mensaje(id, titulo, cuerpo, fecha);
+                    System.out.println("Tipo de mensaje: " + tipoMensaje);
+
 
                     // Procesar el mensaje según su tipo
-                    if (tipoMensaje.equals("MensajeB,")) {
+                    if (tipoMensaje.equals("MensajeB")) {
                         empleadoPorID3.getBandejaDeEntrada().recibirMensaje(mensaje);
-                    } else if (tipoMensaje.equals("MensajeL,")) {
+                        System.out.println("Agregado" );
+                    } else if (tipoMensaje.equals("MensajeL")) {
+                        System.out.println("Agregado" );
                         empleadoPorID3.getMensajesLeidos().agregarMensaje(mensaje);
-                    } else if (tipoMensaje.equals("MensajeD,")) {
-                        empleadoPorID3.getBandejaDeBorrador().agregarBorrador(mensaje);
+                    } else if (tipoMensaje.equals("MensajeD")) {
+                        System.out.println("Agregado" );
+                        empleadoPorID3.guardarBorrador(mensaje);
                     }
                     
                     System.out.println(mensaje.toString());
@@ -152,11 +157,14 @@ public class Test2 {
                     mensaje = new Mensaje(id, titulo, cuerpo, fecha);
 
                     // Procesar el mensaje según su tipo
-                    if (tipoMensaje.equals("MensajeB,")) {
+                    if (tipoMensaje.equals("MensajeB")) {
+                        System.out.println("Agregado" );
                         empleadoPorID.getBandejaDeEntrada().recibirMensaje(mensaje);
-                    } else if (tipoMensaje.equals("MensajeL,")) {
+                    } else if (tipoMensaje.equals("MensajeL")) {
+                        System.out.println("Agregado" );
                         empleadoPorID.getMensajesLeidos().agregarMensaje(mensaje);
-                    } else if (tipoMensaje.equals("MensajeD,")) {
+                    } else if (tipoMensaje.equals("MensajeD")) {
+                        System.out.println("Agregado" );
                         empleadoPorID.getBandejaDeBorrador().agregarBorrador(mensaje);
                     }
                     
@@ -188,11 +196,14 @@ public class Test2 {
                     mensaje = new Mensaje(id, titulo, cuerpo, fecha);
 
                     // Procesar el mensaje según su tipo
-                    if (tipoMensaje.equals("MensajeB,")) {
+                    if (tipoMensaje.equals("MensajeB")) {
+                        System.out.println("Agregado" );
                         empleadoPorID2.getBandejaDeEntrada().recibirMensaje(mensaje);
-                    } else if (tipoMensaje.equals("MensajeL,")) {
+                    } else if (tipoMensaje.equals("MensajeL")) {
+                        System.out.println("Agregado" );
                         empleadoPorID2.getMensajesLeidos().agregarMensaje(mensaje);
-                    } else if (tipoMensaje.equals("MensajeD,")) {
+                    } else if (tipoMensaje.equals("MensajeD")) {
+                        System.out.println("Agregado" );
                         empleadoPorID2.getBandejaDeBorrador().agregarBorrador(mensaje);
                     }
                     

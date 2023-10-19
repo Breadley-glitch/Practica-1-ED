@@ -2,7 +2,11 @@ Información del empleado:
 Empleado [nombre=Jhon, id=13, contraseña=1234, fecha de nacimiento=0/0/0, ciudad de nacimiento=null, direccion=Dirección{calle='null', noCalle=null, nomenclatura='null', barrio='null', ciudad='null'}, telefono=0, email=null,Admin=false]
 
 Mensajes en Bandeja de Entrada:
-No hay mensajes en la bandeja de entrada.
+
+MensajeB, 1, id, 1, Fecha, Thu Oct 19 17:04:35 COT 2023, Título, Hola3, Cuerpo, hola3
+MensajeB, 2, id, 1, Fecha, Thu Oct 19 17:04:21 COT 2023, Título, Hola2, Cuerpo, hola2
+MensajeB, 3, id, 1, Fecha, Thu Oct 19 17:04:05 COT 2023, Título, Hola1, Cuerpo, hola1
+
 Mensajes Leídos:
 No hay mensajes leídos.
 Mensajes en Borrador:
