@@ -1,0 +1,14 @@
+Información del empleado:
+Empleado [nombre=Joss, id=29, contraseña=29, fecha de nacimiento=0/0/0, ciudad de nacimiento=null, direccion=Dirección{calle='null', noCalle=null, nomenclatura='null', barrio='null', ciudad='null'}, telefono=0, email=null,Admin=false]
+
+Mensajes en Bandeja de Entrada:
+
+1. Fecha: Wed Oct 18 19:10:01 COT 2023, Título: UdidIt
+
+Mensajes Leídos:
+
+1. Fecha: Wed Oct 18 19:10:01 COT 2023, Título: UdidIt
+
+Mensajes en Borrador:
+
+1. Fecha: Wed Oct 18 19:10:01 COT 2023, Título: UdidIt

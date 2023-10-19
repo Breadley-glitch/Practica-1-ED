@@ -2,25 +2,18 @@ package Second;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Test2 {
     public static void main(String[] args) {
         Registro registro = new Registro();
         Scanner scanner = new Scanner(System.in);
-        
-        Empleado admin1 = new Empleado("Admin", 1, 1, 1, 2000, "CiudadAdmin", 1234567890L, "admin@empresa.com", "CalleAdmin", "1A", "BarrioAdmin", "CiudadAdmin", "admin123", "administrador");
-        registro.newEmpleado(admin1);
-        // Crear un usuario normal
-        Empleado user = new Empleado(2L, "User", "user123");
-        registro.newEmpleado(user);
-        
-        Empleado user2 = new Empleado(3L, "User2", "user123");
-        registro.newEmpleado(user2);
-        
+              
         // Specify absolute file paths for Empleados.txt and Password.txt
         String empleadosFilePath ="src/Empleados.txt";
         String passwordFilePath ="src/Password.txt";
@@ -271,7 +264,52 @@ public class Test2 {
         	break;
         case 8:
             System.out.println("Saliendo...");
+
+            DoubleList empleadosDoubleList = registro.obtenerDoubleListEmpleados();
+            DoubleNode actual = empleadosDoubleList.first();
+
+            while (actual != null) {
+                Empleado empleado1 = (Empleado) actual.getData();
+                String nombreArchivo = empleado1.getNombre() + ".txt";
+
+                try (FileWriter fileWriter = new FileWriter(nombreArchivo);
+                     BufferedWriter writer = new BufferedWriter(fileWriter)) {
+
+                    // Imprimir información del empleado
+                    writer.write("Información del empleado:");
+                    writer.newLine();
+                    writer.write(empleado1.toString());
+                    writer.newLine();
+                    writer.newLine();
+
+                    // Imprimir mensajes de BandejaDeEntrada
+                    writer.write("Mensajes en Bandeja de Entrada:");
+                    writer.newLine();
+                    empleado1.getBandejaDeEntrada().escribirMensajesEnArchivo(writer);
+                    writer.newLine();
+
+                    // Imprimir mensajes de MensajesLeidos
+                    writer.write("Mensajes Leídos:");
+                    writer.newLine();
+                    empleado1.getMensajesLeidos().escribirMensajesEnArchivo(writer);
+                    writer.newLine();
+
+                    // Imprimir mensajes del Borrador
+                    writer.write("Mensajes en Borrador:");
+                    writer.newLine();
+                    empleado1.getBandejaDeBorrador().escribirMensajesEnArchivo(writer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                actual = actual.getNext();
+            }
+
             System.exit(0);
+            break;
+
+
+
         case 9:
         	System.out.println("Bandeja de Leídos:");
         	empleado.getMensajesLeidos().imprimirMensajes();

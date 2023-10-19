@@ -1,0 +1,11 @@
+Información del empleado:
+Empleado [nombre=Jhon, id=13, contraseña=1234, fecha de nacimiento=0/0/0, ciudad de nacimiento=null, direccion=Dirección{calle='null', noCalle=null, nomenclatura='null', barrio='null', ciudad='null'}, telefono=0, email=null,Admin=false]
+
+Mensajes en Bandeja de Entrada:
+
+1. Fecha: Wed Oct 18 19:10:26 COT 2023, Título: UAwesomeToo
+
+Mensajes Leídos:
+No hay mensajes leídos.
+Mensajes en Borrador:
+No hay mensajes en el borrador.

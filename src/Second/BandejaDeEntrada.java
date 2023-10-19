@@ -1,11 +1,14 @@
 package Second;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class BandejaDeEntrada extends Mensaje {
-    private DoubleList mensajes;
+
+public class BandejaDeEntrada{
+	private DoubleList mensajes;
 
 
     public BandejaDeEntrada() {
-        super(0, "", "");
         mensajes = new DoubleList();
     }
 
@@ -36,6 +39,24 @@ public class BandejaDeEntrada extends Mensaje {
             System.out.println(i + ". Fecha: " + mensaje.getFecha() + ", Título: " + mensaje.getTitulo());
             actual = actual.getNext();
             i++;
+        }
+    }
+    
+    public void escribirMensajesEnArchivo(BufferedWriter writer) throws IOException {
+        if (mensajes.isEmpty()) {
+            writer.write("No hay mensajes en la bandeja de entrada.");
+        } else {
+            writer.newLine();
+            int numMensaje = 1;
+            DoubleNode actual = mensajes.first();
+
+            while (actual != null) {
+                Mensaje mensaje = (Mensaje) actual.getData();
+                writer.write(numMensaje + ". Fecha: " + mensaje.getFecha() + ", Título: " + mensaje.getTitulo());
+                writer.newLine();
+                actual = actual.getNext();
+                numMensaje++;
+            }
         }
     }
 }

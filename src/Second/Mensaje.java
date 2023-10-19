@@ -13,6 +13,13 @@ public Mensaje(long id, String titulo, String cuerpo) {
     this.cuerpo = cuerpo;
     this.fecha = new Date();
 }
+
+public Mensaje(long id, String titulo, String cuerpo, Date fecha) {
+    this.id = id;
+    this.titulo = titulo;
+    this.cuerpo = cuerpo;
+    this.fecha = fecha;
+}
 public long getId() {
     return id;
 }
@@ -42,6 +49,17 @@ public Date getFecha() {
 public void setFecha(Date fecha) {
     this.fecha = fecha;
 }
+
+@Override
+public String toString() {
+    return "Mensaje{" +
+            "id=" + id +
+            ", titulo='" + titulo + '\'' +
+            ", cuerpo='" + cuerpo + '\'' +
+            ", fecha=" + fecha +
+            '}';
+}
+
 }
 
 

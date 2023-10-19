@@ -33,10 +33,18 @@ public class Empleado {
     public Empleado(Long id, String nombre, String contrasena) {
         this.id = id;
         this.nombre = nombre;
+        this.fecha_Nac= new Fecha(0,0,0);
+    	this.ciudad_Nac=null;
+    	this.telefono=0;
+    	this.email=null;
+    	this.direccion= new Direccion(null,null,null,null);
+    	this.administrador = "administrador".equals("Empleado");
         this.contrasena=contrasena;
         this.bandejaDeEntrada = new BandejaDeEntrada();
         this.mensajesLeidos = new MensajesLeidos();
+        this.borrador = new Borrador();
     }
+    
     public String getContrasena() {
     	return contrasena;
     }
@@ -123,8 +131,8 @@ public class Empleado {
         destinatario.getBandejaDeEntrada().recibirMensaje(mensaje);
     }
     public String toString() {
-		return "Empleado [nombre=" + nombre + ", id=" + id + ", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
-				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + "Admin=" +administrador+ "]";
+		return "Empleado [nombre=" + nombre + ", id=" + id + ", contraseña=" +contrasena+", fecha de nacimiento=" + fecha_Nac + ", ciudad de nacimiento=" + ciudad_Nac
+				+ ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + ",Admin=" +administrador+ "]";
 	}
 
     public void crearEmpleado(Empleado administrador, Registro registro, Empleado nuevoEmpleado) {

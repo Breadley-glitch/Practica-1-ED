@@ -1,0 +1,10 @@
+Información del empleado:
+Empleado [nombre=Camila-Jimenez, id=1, contraseña=admin123, fecha de nacimiento=15/9/1985, ciudad de nacimiento=Cali, direccion=Dirección{calle='tr45', noCalle=4S-73, nomenclatura='null', barrio='Poblado', ciudad='Medellin'}, telefono=3003234567, email=camilajimenez@edl.edu.co,Admin=true]
+
+Mensajes en Bandeja de Entrada:
+No hay mensajes en la bandeja de entrada.
+Mensajes Leídos:
+No hay mensajes leídos.
+Mensajes en Borrador:
+
+Mensaje 1: Mensaje{id=1, titulo='lol', cuerpo='456465', fecha=Wed Oct 18 19:10:38 COT 2023}

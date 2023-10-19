@@ -1,7 +1,7 @@
-	package Second;
-	
-	public class Registro {
-	    DoubleList Empleados;
+package Second;
+
+public class Registro{
+		DoubleList Empleados;
 		
 	    public Registro() {
 	    	Empleados = new DoubleList();
@@ -63,4 +63,11 @@
 	        }
 	        System.out.println("No se encontró ningún empleado con el ID " + id + ".");
 	    }
+	    
+	    public DoubleList obtenerDoubleListEmpleados() {
+	        return Empleados;
+	    }
+
+	    
+	    
 	}

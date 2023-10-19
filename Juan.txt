@@ -1,0 +1,9 @@
+Información del empleado:
+Empleado [nombre=Juan, id=99, contraseña=99, fecha de nacimiento=0/0/0, ciudad de nacimiento=null, direccion=Dirección{calle='null', noCalle=null, nomenclatura='null', barrio='null', ciudad='null'}, telefono=0, email=null,Admin=false]
+
+Mensajes en Bandeja de Entrada:
+No hay mensajes en la bandeja de entrada.
+Mensajes Leídos:
+No hay mensajes leídos.
+Mensajes en Borrador:
+No hay mensajes en el borrador.
