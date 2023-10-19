@@ -52,7 +52,7 @@ public class BandejaDeEntrada{
 
             while (actual != null) {
                 Mensaje mensaje = (Mensaje) actual.getData();
-                writer.write(numMensaje + ". Fecha: " + mensaje.getFecha() + ", Título: " + mensaje.getTitulo());
+                writer.write("Mensaje, " + numMensaje + ", id, " +mensaje.getId()+ ", Fecha, " + mensaje.getFecha() + ", Título, " + mensaje.getTitulo()+", Cuerpo, " + mensaje.getCuerpo());
                 writer.newLine();
                 actual = actual.getNext();
                 numMensaje++;

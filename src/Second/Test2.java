@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Test2 {
@@ -17,6 +19,10 @@ public class Test2 {
         // Specify absolute file paths for Empleados.txt and Password.txt
         String empleadosFilePath ="src/Empleados.txt";
         String passwordFilePath ="src/Password.txt";
+        String empleado1FilePath= "Practica-1-ED/Camila-Jimenez.txt";
+        String empleado2FilePath= "Practica-1-ED/Jhon.txt";
+        String empleado3FilePath= "Practica-1-ED/Joss.txt";
+        
         try (BufferedReader passwordReader = new BufferedReader(new FileReader(passwordFilePath))) {
             String passwordLine;
             int lineCount = 0;
@@ -221,24 +227,60 @@ public class Test2 {
         
             
                 
-        case 4:
-            if (empleado.isAdministrador()) {
-                System.out.println("Introduce el ID del empleado al que quieres cambiar la contraseña:");
-                long idEmpleado = scanner.nextLong();
-                Empleado empleadoACambiar = registro.buscarEmpleadoPorId(idEmpleado);
-                
-                if (empleadoACambiar != null) {
-                    System.out.println("Introduce la nueva contraseña:");
-                    String nuevaContrasena = scanner.nextLine();
-                    empleado.cambiarContrasena(empleado, registro, empleadoACambiar, nuevaContrasena);
-                    System.out.println("Contraseña cambiada exitosamente.");
-                } else {
-                    System.out.println("No se encontró ningún empleado con este ID.");
-                }
-            } else {
-                System.out.println("No tienes permisos para realizar esta acción.");
-            }
-            continue; // Vuelve al menú principal
+             case 4:
+            	 if (empleado.isAdministrador()) {
+             	    System.out.println("Introduce el ID del empleado al que quieres cambiar la contraseña:");
+             	    long idEmpleado = scanner.nextLong();
+             	    // Consume the newline character
+             	    scanner.nextLine();
+
+             	    Empleado empleadoACambiar = registro.buscarEmpleadoPorId(idEmpleado);
+
+             	    if (empleadoACambiar != null) {
+             	        System.out.println("Introduce la nueva contraseña:");
+             	        String nuevaContrasena = scanner.nextLine(); // Read the password with nextLine()
+             	        empleado.cambiarContrasena(empleado, registro, empleadoACambiar, nuevaContrasena);
+             	        System.out.println("Contraseña cambiada exitosamente.");
+
+             	        // Save the changes to "Password.txt"
+             	        try (BufferedReader passwordReader = new BufferedReader(new FileReader(passwordFilePath));
+             	             FileWriter tempPasswordFile = new FileWriter("temp_Password.txt");
+             	             BufferedWriter tempPasswordWriter = new BufferedWriter(tempPasswordFile)) {
+
+             	            String passwordLine;
+             	            while ((passwordLine = passwordReader.readLine()) != null) {
+             	                String[] parts = passwordLine.split(" ");
+             	                long currentId = Long.parseLong(parts[0]);
+             	                String newPassword = parts[1];
+             	                String userType = parts[2];
+
+             	                if (currentId == idEmpleado) {
+             	                    // Update the password for the specified ID
+             	                    newPassword = nuevaContrasena;
+             	                }
+
+             	                // Write the updated line to the temporary file
+             	                tempPasswordWriter.write(currentId + " " + newPassword + " " + userType);
+             	                tempPasswordWriter.newLine();
+             	            }
+             	        } catch (IOException e) {
+             	            System.err.println("Error updating Password.txt: " + e.getMessage());
+             	        }
+
+             	        // Replace the original Password.txt with the temporary file
+             	        try {
+             	            Files.deleteIfExists(Paths.get(passwordFilePath)); // Delete the original file
+             	            Files.move(Paths.get("temp_Password.txt"), Paths.get(passwordFilePath)); // Rename the temporary file
+             	        } catch (IOException e) {
+             	            System.err.println("Error updating Password.txt: " + e.getMessage());
+             	        }
+             	    } else {
+             	        System.out.println("No se encontró ningún empleado con este ID.");
+             	    }
+             	} else {
+             	    System.out.println("No tienes permisos para realizar esta acción.");
+             	}
+             	continue;
 
         case 5:
             if (empleado.isAdministrador()) {

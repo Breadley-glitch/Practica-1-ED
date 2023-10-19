@@ -6,5 +6,4 @@ No hay mensajes en la bandeja de entrada.
 Mensajes Leídos:
 No hay mensajes leídos.
 Mensajes en Borrador:
-
-Mensaje 1: Mensaje{id=1, titulo='lol', cuerpo='456465', fecha=Wed Oct 18 19:10:38 COT 2023}
+No hay mensajes en el borrador.

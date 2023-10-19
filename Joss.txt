@@ -3,12 +3,12 @@ Empleado [nombre=Joss, id=29, contraseña=29, fecha de nacimiento=0/0/0, ciudad 
 
 Mensajes en Bandeja de Entrada:
 
-1. Fecha: Wed Oct 18 19:10:01 COT 2023, Título: UdidIt
+Mensaje, 1, id, 1, Fecha, Wed Oct 18 21:18:28 COT 2023, Título, hola, Cuerpo, lol
 
 Mensajes Leídos:
 
-1. Fecha: Wed Oct 18 19:10:01 COT 2023, Título: UdidIt
+Mensaje, 1, id, 1, Fecha, Wed Oct 18 21:18:28 COT 2023, Título, hola, Cuerpo, lol
 
 Mensajes en Borrador:
 
-1. Fecha: Wed Oct 18 19:10:01 COT 2023, Título: UdidIt
+Mensaje, 1, id, 1, Fecha, Wed Oct 18 21:18:28 COT 2023, Título, hola, Cuerpo, lol
