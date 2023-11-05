@@ -3,9 +3,10 @@ Empleado [nombre=Camila-Jimenez, id=1, contraseña=admin123, fecha de nacimiento
 
 Mensajes en Bandeja de Entrada:
 
-MensajeB, 1, id, 1, Fecha, Thu Oct 19 17:05:09 COT 2023, Título, Hola3, Cuerpo, hola3
-MensajeB, 2, id, 1, Fecha, Thu Oct 19 17:05:01 COT 2023, Título, Hola2, Cuerpo, hola2
+MensajeB, 1, id, 1111, Fecha, Thu Oct 19 17:26:18 COT 2023, Título, Prueba2, Cuerpo, prueba2
+MensajeB, 2, id, 1111, Fecha, Thu Oct 19 17:24:58 COT 2023, Título, Prueba1, Cuerpo, EsteEsUnaPrueba
 MensajeB, 3, id, 1, Fecha, Thu Oct 19 17:04:50 COT 2023, Título, Hola1, Cuerpo, hola1
+MensajeB, 4, id, 1, Fecha, Thu Oct 19 17:05:09 COT 2023, Título, Hola3, Cuerpo, hola3
 
 Mensajes Leídos:
 No hay mensajes leídos.

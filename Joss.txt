@@ -3,9 +3,9 @@ Empleado [nombre=Joss, id=29, contraseña=29, fecha de nacimiento=0/0/0, ciudad 
 
 Mensajes en Bandeja de Entrada:
 
-MensajeB, 1, id, 1, Fecha, Thu Oct 19 17:03:56 COT 2023, Título, Hola3, Cuerpo, hola3
+MensajeB, 1, id, 1, Fecha, Thu Oct 19 17:03:38 COT 2023, Título, Hola1, Cuerpo, hola1
 MensajeB, 2, id, 1, Fecha, Thu Oct 19 17:03:46 COT 2023, Título, Hola2, Cuerpo, hola2
-MensajeB, 3, id, 1, Fecha, Thu Oct 19 17:03:38 COT 2023, Título, Hola1, Cuerpo, hola1
+MensajeB, 3, id, 1, Fecha, Thu Oct 19 17:03:56 COT 2023, Título, Hola3, Cuerpo, hola3
 
 Mensajes Leídos:
 No hay mensajes leídos.

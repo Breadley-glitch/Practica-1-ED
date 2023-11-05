@@ -1,0 +1,10 @@
+Información del empleado:
+Empleado [nombre=Maria, id=1111, contraseña=1111, fecha de nacimiento=0/0/0, ciudad de nacimiento=null, direccion=Dirección{calle='null', noCalle=null, nomenclatura='null', barrio='null', ciudad='null'}, telefono=0, email=null,Admin=false]
+
+Mensajes en Bandeja de Entrada:
+No hay mensajes en la bandeja de entrada.
+Mensajes Leídos:
+No hay mensajes leídos.
+Mensajes en Borrador:
+
+MensajeD, 1, id, 1111, Fecha, Thu Oct 19 17:25:19 COT 2023, Título, Prueba2, Cuerpo, prueba2
