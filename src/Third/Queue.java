@@ -19,19 +19,20 @@ public class Queue {
         data.addLast(e);
     }
 
-    public Object dequeue() {
+    public Node dequeue() {
         if (isEmpty()) {
-            return null; // Devuelve null si la cola está vacía
+            return null; // Returns null if the queue is empty
         } else {
-            return data.removeFirst();
+            return (Node) data.removeFirst();
         }
     }
+
     
-    public Object first() {
-    	if (isEmpty()) {
-    		return null;
-    	}else {
-    		return data.First().getData();
-    	}
+    public Node first() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            return (Node) data.First().getData();
+        }
     }
-}
+   }

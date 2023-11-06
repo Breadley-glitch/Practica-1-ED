@@ -47,24 +47,26 @@ public class BinaryTree {
 	}
 	
 	public Node parent(Node v) {
-		if (isRoot(v)){
-			return null;
-		}else {
-			Queue Q = new Queue();
-			Q.enqueue(root);
-			Node temp = root;
-			while (!Q.isEmpty() & left(Q.first()) !=v  & right(Q.first() !=v)) {
-				temp = Q.dequeue();
-				if(hasLeft(temp)) {
-					Q.enqueue(left(temp));
-				}
-				if (hasRight(temp)) {
-					Q.enqueue(right(temp));
-				}
-			}
-			return temp;
-		}
+	    Node temp = null;
+	    if (isRoot(v)){
+	        return null;
+	    } else {
+	        Queue Q = new Queue();
+	        Q.enqueue(root);
+	        temp = root;
+	        while (!Q.isEmpty() && left(Q.first()) != v  && right(Q.first()) != v) {
+	            temp = (Node) Q.dequeue();
+	            if(hasLeft(temp)) {
+	                Q.enqueue(left(temp));
+	            }
+	            if (hasRight(temp)) {
+	                Q.enqueue(right(temp));
+	            }
+	        }
+	    }
+	    return temp;
 	}
+	
 	
 	public int depth(Node v) {
 		if (isRoot(v)) {

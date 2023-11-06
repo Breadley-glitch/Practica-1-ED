@@ -17,6 +17,7 @@ public class Node {
 		left =null;
 	}
 	
+	
 	public void setData(Object d) {
 		this.data = d;
 	}
