@@ -24,4 +24,9 @@ public class BSTEntry {
     public void setKey(int k) {
     	this.clave=k;
     }
+    @Override
+    public String toString() {
+        return "Key: " + this.getKey() + ", Data: " + this.getData().toString();
+    }
+ 
 }

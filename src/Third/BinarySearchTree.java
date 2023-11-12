@@ -103,7 +103,13 @@ public class BinarySearchTree extends BinaryTree{
 	    }
 	}
 
-
+	public void mostrarArbol(Node node, String prefix) {
+	    if (node != null) {
+	        mostrarArbol(node.getRight(), prefix + "    ");
+	        System.out.println(prefix + node.getData().toString());
+	        mostrarArbol(node.getLeft(), prefix + "    ");
+	    }
+	}
 
 
 }

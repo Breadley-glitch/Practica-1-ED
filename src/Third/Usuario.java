@@ -17,4 +17,8 @@ public class Usuario {
         }
         return suma;
      }
+    @Override
+    public String toString() {
+        return "Nombre: " + this.nombre + ", Identificación: " + this.identificacion;
+    }
   }

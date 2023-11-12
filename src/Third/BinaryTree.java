@@ -103,6 +103,9 @@ public class BinaryTree {
 		v.setRight(v);
 		size++;
 	}
+	public void visit(Node v) {
+	    System.out.println(v.getData());
+	}
 	
 	public void remove(Node v) {
 	    Node p = parent(v);
