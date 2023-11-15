@@ -20,6 +20,9 @@ public class Test {
 
 	    Usuario mateo = new Usuario("Mateo", 10110005);
 	    bst.insert(mateo.calcularClave(), mateo);
+	    
+	    Usuario Breadley = new Usuario("Breadley",1193536108);
+	    bst.insert(Breadley.calcularClave(), Breadley);
 
 	    // Ahora puedes probar los diferentes métodos del árbol binario de búsqueda.
 	    // Por ejemplo, puedes imprimir el árbol en orden.
