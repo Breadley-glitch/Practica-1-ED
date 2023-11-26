@@ -55,15 +55,111 @@ class Grafo {
             }
         }
 
+        System.out.print("      ");
         for (int i = 0; i < n; i++) {
+            System.out.printf("%-4s ", this.nombresCiudades.get(i));
+        }
+        System.out.println();
+
+        for (int i = 0; i < n; i++) {
+            System.out.printf("%-4s ", this.nombresCiudades.get(i));
             for (int j = 0; j < n; j++) {
                 if (matriz[i][j] == Integer.MAX_VALUE) {
                     System.out.print("000 ");
                 } else {
-                    System.out.print(matriz[i][j] + " ");
+                    System.out.printf("%-4d ", matriz[i][j]);
                 }
             }
             System.out.println();
         }
     }
+    
+    
+    boolean estanConectadas(String ciudadA, String ciudadB) {
+        Ciudad ciudadOrigen = this.ciudades.get(ciudadA);
+        if (ciudadOrigen == null) {
+            System.out.println("La ciudad " + ciudadA + " no existe en el grafo.");
+            return false;
+        }
+
+        for (Carretera carretera : ciudadOrigen.carreteras) {
+            if (carretera.destino.nombre.equals(ciudadB)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    List<String> caminoMasCorto(String ciudadA, String ciudadB) {
+        Map<String, Integer> distancias = new HashMap<>();
+        Map<String, String> predecesores = new HashMap<>();
+        PriorityQueue<Ciudad> cola = new PriorityQueue<>(Comparator.comparingInt(ciudad -> distancias.get(ciudad.nombre)));
+
+        for (String nombreCiudad : this.nombresCiudades) {
+            distancias.put(nombreCiudad, Integer.MAX_VALUE);
+        }
+        distancias.put(ciudadA, 0);
+
+        cola.add(this.ciudades.get(ciudadA));
+
+        while (!cola.isEmpty()) {
+            Ciudad ciudadActual = cola.poll();
+
+            for (Carretera carretera : ciudadActual.carreteras) {
+                int distanciaAlternativa = distancias.get(ciudadActual.nombre) + carretera.distancia;
+                if (distanciaAlternativa < distancias.get(carretera.destino.nombre)) {
+                    distancias.put(carretera.destino.nombre, distanciaAlternativa);
+                    predecesores.put(carretera.destino.nombre, ciudadActual.nombre);
+                    cola.add(carretera.destino);
+                }
+            }
+        }
+
+        List<String> camino = new ArrayList<>();
+        for (String ciudad = ciudadB; ciudad != null; ciudad = predecesores.get(ciudad)) {
+            camino.add(ciudad);
+        }
+        Collections.reverse(camino);
+
+        return camino;
+    }
+    
+    List<String> caminoMasCortoTiempo(String ciudadA, String ciudadB) {
+        Map<String, Integer> tiempos = new HashMap<>();
+        Map<String, String> predecesores = new HashMap<>();
+        PriorityQueue<Ciudad> cola = new PriorityQueue<>(Comparator.comparingInt(ciudad -> tiempos.get(ciudad.nombre)));
+
+        for (String nombreCiudad : this.nombresCiudades) {
+            tiempos.put(nombreCiudad, Integer.MAX_VALUE);
+        }
+        tiempos.put(ciudadA, 0);
+
+        cola.add(this.ciudades.get(ciudadA));
+
+        while (!cola.isEmpty()) {
+            Ciudad ciudadActual = cola.poll();
+
+            for (Carretera carretera : ciudadActual.carreteras) {
+                int tiempoAlternativo = tiempos.get(ciudadActual.nombre) + carretera.tiempo;
+                if (tiempoAlternativo < tiempos.get(carretera.destino.nombre)) {
+                    tiempos.put(carretera.destino.nombre, tiempoAlternativo);
+                    predecesores.put(carretera.destino.nombre, ciudadActual.nombre);
+                    cola.add(carretera.destino);
+                }
+            }
+        }
+
+        List<String> camino = new ArrayList<>();
+        for (String ciudad = ciudadB; ciudad != null; ciudad = predecesores.get(ciudad)) {
+            camino.add(ciudad);
+        }
+        Collections.reverse(camino);
+
+        return camino;
+    }
+
+
+
+
 }
