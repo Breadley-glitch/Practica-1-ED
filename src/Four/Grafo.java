@@ -57,17 +57,17 @@ class Grafo {
 
         System.out.print("      ");
         for (int i = 0; i < n; i++) {
-            System.out.printf("%-4s ", this.nombresCiudades.get(i));
+            System.out.printf("%-10s ", this.nombresCiudades.get(i));
         }
         System.out.println();
 
         for (int i = 0; i < n; i++) {
-            System.out.printf("%-4s ", this.nombresCiudades.get(i));
+            System.out.printf("%-10s ", this.nombresCiudades.get(i));
             for (int j = 0; j < n; j++) {
                 if (matriz[i][j] == Integer.MAX_VALUE) {
-                    System.out.print("000 ");
+                    System.out.print("INF       ");
                 } else {
-                    System.out.printf("%-4d ", matriz[i][j]);
+                    System.out.printf("%-10d ", matriz[i][j]);
                 }
             }
             System.out.println();
