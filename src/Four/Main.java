@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 	    Grafo grafo = new Grafo();
-	    String ruta = "C:\\Users\\jhon\\eclipse-workspace\\Final\\src\\Date.txt";
+	    String ruta = "C://Users//jossh//eclipse-workspace//FinalProject//src//Date.txt/";
 
 	    try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String linea;
@@ -86,11 +86,24 @@ public class Main {
 	                    System.out.println("No hay un camino entre " + ciudadA2 + " y " + ciudadB2 + ".");
 	                } else {
 	                    System.out.println("El camino más corto en tiempo entre " + ciudadA2 + " y " + ciudadB2 + " es:");
+	                    String prevCiudad = null;
+	                    int totalTime = 0;
 	                    for (String ciudad : camino2) {
 	                        System.out.println("  " + ciudad);
+	                        if (prevCiudad != null) {
+	                            for (Carretera carretera : grafo.ciudades.get(prevCiudad).carreteras) {
+	                                if (carretera.destino.nombre.equals(ciudad)) {
+	                                    totalTime += carretera.tiempo;
+	                                    break;
+	                                }
+	                            }
+	                        }
+	                        prevCiudad = ciudad;
 	                    }
+	                    System.out.println("El tiempo total de viaje es: " + totalTime + " minutos.");
 	                }
 	                break;
+
 	    
 	            case 4:
 	                continuar = false;
