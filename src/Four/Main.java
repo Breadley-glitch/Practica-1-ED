@@ -5,11 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Main {
 	public static void main(String[] args) {
 	    Grafo grafo = new Grafo();
-	    String ruta = "C://Users//jossh//eclipse-workspace//FinalProject//src//Date.txt/";
+	    File directorio = new File("src" + File.separator + "Date.txt");
+	    String ruta = directorio.getAbsolutePath();
+
 
 	    try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String linea;
@@ -67,9 +70,21 @@ public class Main {
 	                    System.out.println("No hay un camino entre " + ciudadA1 + " y " + ciudadB1 + ".");
 	                } else {
 	                    System.out.println("El camino más corto entre " + ciudadA1 + " y " + ciudadB1 + " es:");
+	                    String prevCiudad = null;
+	                    int totalDistancia = 0;
 	                    for (String ciudad : camino) {
 	                        System.out.println("  " + ciudad);
+	                        if (prevCiudad != null) {
+	                            for (Carretera carretera : grafo.ciudades.get(prevCiudad).carreteras) {
+	                                if (carretera.destino.nombre.equals(ciudad)) {
+	                                    totalDistancia += carretera.distancia;
+	                                    break;
+	                                }
+	                            }
+	                        }
+	                        prevCiudad = ciudad;
 	                    }
+	                    System.out.println("La distancia total del viaje es: " + totalDistancia + " kilómetros.");
 	                }
 	                break;
 
